@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Trasy</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="node_modules/admin-lte/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="node_modules/admin-lte/dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="node_modules/admin-lte/dist/css/skins/_all-skins.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <header class="main-header">
+
+        <!-- Logo -->
+        <a href="index2.html" class="logo">
+        </a>
+
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>Trasa</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <!-- Info boxes -->
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-crosshairs"></i> Podstawowe informacje</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                        class="fa fa-minus"></i>
+                                </button>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-box-tool dropdown-toggle"
+                                            data-toggle="dropdown">
+                                        <i class="fa fa-bars"></i></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#"><i class="fa fa-pencil"></i>Edytuj</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#"><i class="fa fa-check"></i>Zatwierdź</a></li>
+                                        <li><a href="#"><i class="fa fa-close"></i>Odrzuć</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <dl class="dl-horizontal no-margin">
+                                <dt>Nazwa</dt>
+                                <dd>Żółta - św. Jana Kantego</dd>
+                                <dt>Patron</dt>
+                                <dd>św. Jan Kandy</dd>
+                                <dt>Kolor</dt>
+                                <dd>niebieska</dd>
+                                <dt>Autor</dt>
+                                <dd>Michał Buśko</dd>
+                            </dl>
+                        </div><!-- ./box-body -->
+                    </div>
+                    <!-- /.box -->
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-globe"></i> Charakterystyka</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                        class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="row">
+                                <dl class="dl-horizontal no-margin">
+                                    <dt>Początek</dt>
+                                    <dd>Kraków <span class="users-list-date">Kościoł św Józefa</span></dd>
+                                    <dt>Koniec</dt>
+                                    <dd>Kalwaria Zebrzydowska <span class="users-list-date">Sanktuarium Matki Bożej w Kalwarii Zebrzydowskiej</span></dd>
+                                    <dt>Długość</dt>
+                                    <dd>42 km</dd>
+                                    <dt>Przewyższenia</dt>
+                                    <dd>500 m</dd>
+                                </dl>
+                                <div class="divider"></div>
+                                <dl class="dl-horizontal no-margin">
+                                    <dt>Kontynent</dt>
+                                    <dd>Europa</dd>
+                                    <dt>Państwo</dt>
+                                    <dd>Polska</dd>
+                                    <dt>Region</dt>
+                                    <dd>woj. Małopolskie</dd>
+                                    <dt>Miejscowość</dt>
+                                    <dd>Kraków</dd>
+                                </dl>
+                            </div>
+
+                        </div><!-- ./box-body -->
+                    </div>
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab_1" data-toggle="tab">Przebieg</a></li>
+                            <li><a href="#tab_2" data-toggle="tab">Krótki opis</a></li>
+                            <li><a href="#tab_3" data-toggle="tab">Dodatkowe informacje</a></li>
+                            <li><a href="#tab_4" data-toggle="tab">Rejony</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_1">
+                                <p>Kościół św. Józefa, Rynek Podgórski – Łagiewniki – Łagiewniki - Borek Fałęcki –
+                                    Kobierzyn – Sidzina – Libertów – Brzyczyna – Chorowice – Kulerzów - Las Bronaczowa –
+                                    Radziszów – Krzywaczka – Podchybie - Zarzyce Małe – Brody - Kalwaria
+                                    Zebrzydowska</p>
+                            </div>
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="tab_2">
+                                <p>Trasa początkowo biegnie dłuższym odcinkiem przez Kraków, po czym przecina okoliczne
+                                    miejscowości takie jak Libertów, Brzyczyna, Chorowice i Kulerzów. Za Kulerzowem
+                                    trasa prowadzi do Lasu Bronaczowa, przez który przebiega na nieomal całej jego
+                                    długości. Idąc tą trasą miniemy następnie Krzywaczkę, Pochybie i Zarzyce Małe,
+                                    podążać będziemy polnymi i leśnymi ścieżkami - te poprowadzą nas do Kalwarii.</p>
+                            </div>
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="tab_3">
+                                <p>O godzinie 8.09 oraz 13.57 z dworca kolejowego w Kalwarii odjeżdżają osobowe pociągi
+                                    do Krakowa. Z uwagi na dużą liczbę osób, które tego dnia przybędą do Sanktuarium,
+                                    ten wariant powrotu do Krakowa może okazać się być najkorzystniejszym. Dworzec PKP
+                                    znajduje się niecałe 2 km od Sanktuarium (ul. 3 maja w kierunku centrum, dalej ul.
+                                    Jagiellońską i Kolejową).
+                                </p>
+                                <p>Oprócz wspomnianego środka transportu z Kalwarii Zebrzydowskiej do Krakowa kursują
+                                    regularnie autobusy i busy prywatne.</p>
+                            </div>
+                            <div class="tab-pane" id="tab_4">
+                                <table class="table no-margin">
+                                    <thead>
+                                    <tr>
+                                        <th>Rejon</th>
+                                        <th>Edycja</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><a href="">Kraków - Pogdórze</a></td>
+                                        <td>EDK 2018</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="">Kraków - Pogdórze</a></td>
+                                        <td>EDK 2017</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="">Kraków - Pogdórze</a></td>
+                                        <td>EDK 2016</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="">Kraków - Pogdórze</a></td>
+                                        <td>EDK 2015</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="">Kraków - Pogdórze</a></td>
+                                        <td>EDK 2014</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="">Kraków - Pogdórze</a></td>
+                                        <td>EDK 2013</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="">Kraków - Pogdórze</a></td>
+                                        <td>EDK 2012</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-md-5">
+
+                    <div class="info-box bg-navy">
+                        <span class="info-box-icon"><i class="fa fa-flag"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-number">Trasa EDK</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <div class="info-box bg-green">
+                        <span class="info-box-icon"><i class="fa fa-check"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Trasa zatwierdzona</span>
+                            <span class="progress-description"><i class="fa fa-plus"></i> 2017-01-02 22:00 <i
+                                    class="fa fa-user"></i> Marcin Piekarz</span>
+                            <span class="progress-description"><i class="fa fa-pencil"></i> 2017-01-02 22:00 <i
+                                    class="fa fa-user"></i> Marcin Piekarz</span>
+                            <span class="progress-description"><i class="fa fa-check"></i> 2017-01-02 22:00 <i
+                                    class="fa fa-user"></i> Marcin Piekarz</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <div class="box box-solid">
+                        <div id="map" style="height: 400px"></div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.row -->
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <div class="col-md-7">
+                    <!-- MAP & BOX PANE -->
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Pliki</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                        class="fa fa-minus"></i>
+                                </button>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-box-tool dropdown-toggle"
+                                            data-toggle="dropdown">
+                                        <i class="fa fa-bars"></i></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#"><i class="fa fa-check"></i>Zatwierdź opis</a></li>
+                                        <li><a href="#"><i class="fa fa-close"></i>Odrzuć opis</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#"><i class="fa fa-check"></i>Zatwierdź mapę</a></li>
+                                        <li><a href="#"><i class="fa fa-close"></i>Odrzuć mapę</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body no-padding">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="info-box">
+                                        <span class="info-box-icon bg-green"><i class="fa fa-map-marker"></i></span>
+                                        <span class="info-box-icon bg-navy pull-right"><i
+                                                class="fa fa-download"></i></span>
+
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Ślad (KML)</span>
+                                            <span class="progress-description"><i class="fa fa-plus"></i> 2017-01-02 22:00 <i
+                                                    class="fa fa-user"></i> Marcin Piekarz</span>
+                                            <span class="progress-description"><i class="fa fa-pencil"></i> 2017-01-02 22:00 <i
+                                                    class="fa fa-user"></i> Marcin Piekarz</span>
+                                            <span class="progress-description"><i class="fa fa-check"></i> 2017-01-02 22:00 <i
+                                                    class="fa fa-user"></i> Marcin Piekarz</span>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <div class="info-box">
+                                        <span class="info-box-icon bg-blue"><i class="fa fa-file-pdf-o"></i></span>
+                                        <span class="info-box-icon bg-navy pull-right"><i
+                                                class="fa fa-download"></i></span>
+
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Opis (PDF)</span>
+                                            <span class="progress-description"><i class="fa fa-plus"></i> 2017-01-02 22:00 <i
+                                                    class="fa fa-user"></i> Marcin Piekarz</span>
+                                            <span class="progress-description"><i class="fa fa-pencil"></i> 2017-01-02 22:00 <i
+                                                    class="fa fa-user"></i> Marcin Piekarz</span>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <div class="info-box no-margin">
+                                        <span class="info-box-icon"><i class="fa fa-map"></i></span>
+                                        <span class="info-box-icon pull-right"><i class="fa fa-download"></i></span>
+
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Mapa (PDF,JPG)</span>
+                                            <span class="progress-description">Wygląda, że nic tutaj jeszcze nie ma.</span>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+
+                </div>
+                <div class="col-md-5">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab_comment_1" data-toggle="tab"><i
+                                    class="fa fa-commenting"></i> Uwagi do trasy <span
+                                    data-toggle="tooltip" title="3 New Messages"
+                                    class="badge bg-green">3</span> </a></li>
+                            <li><a href="#tab_comment_2" data-toggle="tab"><i class="fa fa-comment"></i> Komentarze
+                                uczestników <span
+                                        data-toggle="tooltip" title="3 New Messages"
+                                        class="badge bg-green">3</span></a></li>
+                        </ul>
+                        <div class="tab-content no-padding">
+                            <div class="tab-pane active" id="tab_comment_1">
+                                <div class="box-body no-padding">
+                                    <!-- Conversations are loaded here -->
+                                    <div class="direct-chat-messages">
+                                        <!-- Message. Default to the left -->
+                                        <div class="direct-chat-msg">
+                                            <div class="direct-chat-info clearfix">
+                                                <span class="direct-chat-name pull-left">Alexander Pierce</span>
+                                                <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+                                            </div>
+                                            <!-- /.direct-chat-info -->
+                                            <img class="direct-chat-img"
+                                                 src="node_modules/admin-lte/dist/img/user1-128x128.jpg"
+                                                 alt="message user image">
+                                            <!-- /.direct-chat-img -->
+                                            <div class="direct-chat-text">
+                                                Is this template really for free? That's unbelievable!
+                                            </div>
+                                            <!-- /.direct-chat-text -->
+                                        </div>
+                                        <!-- /.direct-chat-msg -->
+
+                                        <!-- Message to the right -->
+                                        <div class="direct-chat-msg right">
+                                            <div class="direct-chat-info clearfix">
+                                                <span class="direct-chat-name pull-right">Sarah Bullock</span>
+                                                <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+                                            </div>
+                                            <!-- /.direct-chat-info -->
+                                            <img class="direct-chat-img"
+                                                 src="node_modules/admin-lte/dist/img/user3-128x128.jpg"
+                                                 alt="message user image">
+                                            <!-- /.direct-chat-img -->
+                                            <div class="direct-chat-text">
+                                                You better believe it!
+                                            </div>
+                                            <!-- /.direct-chat-text -->
+                                        </div>
+                                        <!-- /.direct-chat-msg -->
+
+                                        <!-- Message. Default to the left -->
+                                        <div class="direct-chat-msg">
+                                            <div class="direct-chat-info clearfix">
+                                                <span class="direct-chat-name pull-left">Alexander Pierce</span>
+                                                <span class="direct-chat-timestamp pull-right">23 Jan 5:37 pm</span>
+                                            </div>
+                                            <!-- /.direct-chat-info -->
+                                            <img class="direct-chat-img"
+                                                 src="node_modules/admin-lte/dist/img/user1-128x128.jpg"
+                                                 alt="message user image">
+                                            <!-- /.direct-chat-img -->
+                                            <div class="direct-chat-text">
+                                                Working with AdminLTE on a great new app! Wanna join?
+                                            </div>
+                                            <!-- /.direct-chat-text -->
+                                        </div>
+                                        <!-- /.direct-chat-msg -->
+
+                                        <!-- Message to the right -->
+                                        <div class="direct-chat-msg right">
+                                            <div class="direct-chat-info clearfix">
+                                                <span class="direct-chat-name pull-right">Sarah Bullock</span>
+                                                <span class="direct-chat-timestamp pull-left">23 Jan 6:10 pm</span>
+                                            </div>
+                                            <!-- /.direct-chat-info -->
+                                            <img class="direct-chat-img"
+                                                 src="node_modules/admin-lte/dist/img/user3-128x128.jpg"
+                                                 alt="message user image">
+                                            <!-- /.direct-chat-img -->
+                                            <div class="direct-chat-text">
+                                                I would love to.
+                                            </div>
+                                            <!-- /.direct-chat-text -->
+                                        </div>
+                                        <!-- /.direct-chat-msg -->
+
+                                    </div>
+                                    <!--/.direct-chat-messages-->
+
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer">
+                                    <form action="#" method="post">
+                                        <div class="input-group">
+                                            <input type="text" name="message" placeholder="Wpisz swoje uwagi..."
+                                                   class="form-control">
+                                            <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary btn-flat"><i
+                                    class="fa fa-send-o"></i> Wyślij</button>
+                          </span>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.box-footer-->
+                            </div>
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="tab_comment_2">
+
+                                <div class="box-comments box-body">
+                                    <div class="box-comments">
+                                        <div class="box-comment">
+                                            <!-- User image -->
+                                            <img class="img-circle img-sm"
+                                                 src="node_modules/admin-lte/dist/img/user3-128x128.jpg"
+                                                 alt="User Image">
+
+                                            <div class="comment-text">
+                      <span class="username">
+                        Maria Gonzales
+                        <span class="text-muted pull-right">8:03 PM Today</span>
+                      </span><!-- /.username -->
+                                                It is a long established fact that a reader will be distracted
+                                                by the readable content of a page when looking at its layout.
+                                            </div>
+                                            <!-- /.comment-text -->
+                                        </div>
+                                        <!-- /.box-comment -->
+                                        <div class="box-comment">
+                                            <!-- User image -->
+                                            <img class="img-circle img-sm"
+                                                 src="node_modules/admin-lte/dist/img/user4-128x128.jpg"
+                                                 alt="User Image">
+
+                                            <div class="comment-text">
+                      <span class="username">
+                        Luna Stark
+                        <span class="text-muted pull-right">8:03 PM Today</span>
+                      </span><!-- /.username -->
+                                                It is a long established fact that a reader will be distracted
+                                                by the readable content of a page when looking at its layout.
+                                            </div>
+                                            <!-- /.comment-text -->
+                                        </div>
+                                        <!-- /.box-comment -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Weryfikacja śladu trasy</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                        class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-navy-active disabled"><i class="fa fa-flag-o"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Typ trasy</span>
+                                        <span class="info-box-number">Na wzór</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-gray-light"><i class="fa fa-map-signs"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Długość</span>
+                                        <span class="info-box-number">90 <small>km</small></span>
+                                        <span class="users-list-date">Długość wyliczona na podstawie dołączonego śladu trasy.</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-gray-light"><i class="fa fa-arrow-up"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Podejścia</span>
+                                        <span class="info-box-number">500 <small>m</small></span>
+                                        <span class="users-list-date">Suma podejść wyliczona na podstawie śladu trasy.</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-gray-light"><i class="fa fa-arrow-down"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Zejścia</span>
+                                        <span class="info-box-number">90 <small>m</small></span>
+                                        <span class="users-list-date">Suma zejść wyliczona na podstawie śladu trasy.</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-gray-light"><i class="fa fa-arrows-v"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Różnica wysokości</span>
+                                        <span class="info-box-number">590 <small>m</small></span>
+                                        <span class="users-list-date">Suma przewyższeń.</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-green"><i class="fa fa-map-marker"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Ilość stacji</span>
+                                        <span class="info-box-number">14</span>
+                                        <span class="users-list-date">Trasa powinna liczyć 14 stacji w kótrych odmawiane są rozważania.</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-green"><i
+                                            class="fa fa-sort-numeric-asc"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Kolejność stacji</span>
+                                        <span class="users-list-date">Stacje powinny być kolejno ponumerowane, kolejnymy liczbami rzymskimi (I, II,...)</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-green"><i class="fa fa-map-pin"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Początek, koniec trasy</span>
+                                        <span class="users-list-date">Na śladzie zaznczony powinen być punkt początkowy i końcowy.</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-warning"><i class="fa fa-circle-o"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Jedna nitka</span>
+                                        <span class="users-list-date">Ślad trasy zawierać pownien jedną nitkę - ścieżkę.</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-yellow"><i class="fa fa-warning"></i></span>
+
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Zgodność danych</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <div class="col-md-10">
+                                <div id="histogram">Histogram</div>
+                            </div>
+                            <div class="col-md-2"><button type="button" class="btn btn-flat btn-block btn-primary">
+                                <i class="fa fa-gears"></i> Sprawdź
+                            </button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="node_modules/admin-lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="node_modules/admin-lte/bootstrap/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="node_modules/admin-lte/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="node_modules/admin-lte/dist/js/app.js"></script>
+<!-- Sparkline -->
+<script src="node_modules/admin-lte/plugins/sparkline/jquery.sparkline.min.js"></script>
+<!-- SlimScroll -->
+<script src="node_modules/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+
+<script src="loadMap.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=***REMOVED***&callback=initMap">
+</script>
+</body>
+</html>
