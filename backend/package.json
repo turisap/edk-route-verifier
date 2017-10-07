@@ -1,0 +1,17 @@
+{
+  "name": "proxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "proxy.js",
+  "scripts": {
+    "start": "node proxy.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jakub Niezgoda",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.1",
+    "request": "^2.83.0",
+    "cors": "^2.8.4"
+  }
+}
