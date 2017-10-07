@@ -635,7 +635,7 @@
                             <div class="col-md-10">
                                 <div id="histogram">Histogram</div>
                             </div>
-                            <div class="col-md-2"><button type="button" class="btn btn-flat btn-block btn-primary">
+                            <div class="col-md-2"><button id="verifyRoute" type="button" class="btn btn-flat btn-block btn-primary">
                                 <i class="fa fa-gears"></i> Sprawdź
                             </button></div>
                         </div>
@@ -665,11 +665,13 @@
 <!-- Sparkline -->
 <script src="../node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
 <!-- SlimScroll -->
-<script src="../node_modules/slimscroll/lib/slimscroll.js"></script>
+<!--<script src="../node_modules/slimscroll/lib/slimscroll.js"></script>-->
 
 <script src="js/loadMap.js"></script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=***REMOVED***&callback=initMap">
 </script>
+
+<script src="routeVerifier.js"></script>
 </body>
 </html>
