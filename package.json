@@ -2,10 +2,10 @@
   "name": "edk-route-verifier",
   "version": "0.1.0",
   "description": "",
-  "main": "index.html",
+  "main": "trasa.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bundle": "cd src; browserify _routeVerifier.js > routeVerifier.js"
+    "bundle": "browserify src/routeVerifier.js > test/routeVerifier.js"
   },
   "author": "Jakub Niezgoda",
   "license": "ISC",

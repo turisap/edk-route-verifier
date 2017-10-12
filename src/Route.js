@@ -152,7 +152,6 @@ module.exports = function (geoJson) {
             result = google.maps.geometry.spherical.computeLength(googleMapsPath);
         }
 
-        result = result.toFixed(2);
         console.log('getPathLength:', result, ', method:', useTurf ? 'turf' : 'google-maps');
         return result;
     }
