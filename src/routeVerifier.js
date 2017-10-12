@@ -5,9 +5,10 @@ var Controls = require('./Controls')
 
 function verifyRoute() {
     var context = new Context();
-    var routeId = context.routeId;
+    var routeUrl = context.routeUrl;
+    var isLocal = context.isLocal;
 
-    helpers.getRoute(routeId, true)
+    helpers.getRoute(routeUrl, isLocal)
         .then(function (data) {
             var geoJson = helpers.getGeoJSON(data);
             var route = new Route(geoJson);

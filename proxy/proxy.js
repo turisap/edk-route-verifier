@@ -6,7 +6,7 @@ var app = express();
 var apiServerHost = 'http://rejony.edk.org.pl';
 var port = process.env.PORT || 3000;
 
-app.use('/', cors(), function(req, res) {
+app.use('', cors(), function(req, res) {
     var url = apiServerHost + req.url;
     console.log('Proxing request to: ', url);
     req.pipe(request(url)).pipe(res);

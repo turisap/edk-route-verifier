@@ -1,5 +1,6 @@
 
 module.exports = function() {
-    this.routeId = routeId;
+    this.routeUrl = $('div#map').attr('data-what');
+    this.isLocal = true;
 }
 
