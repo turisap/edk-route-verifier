@@ -17,18 +17,18 @@ function verifyRoute() {
             controls.updateSinglePath(route.isSinglePath());
             controls.updatePathStartEndMarked(route.isPathStartMarked(), route.isPathEndMarked());
 
-            var length = route.getPathLength(true); // route.getPathLength(false);
+            var routeLength = route.getPathLength();
 
-            var isNormalRoute = length > 40;
+            var isNormalRoute = routeLength > 40;
             controls.updateRouteType(isNormalRoute);
 
-            var isPathLengthValid = length > 20;
-            controls.updatePathLength(isPathLengthValid, length);
+            var isPathLengthValid = routeLength > 20;
+            controls.updatePathLength(isPathLengthValid, routeLength);
 
             route.fetchPathElevationData()
                 .then(function() {
                     var pathElevation = route.getPathElevation();
-                    pathElevation.enrichData(length);
+                    pathElevation.enrichData(routeLength);
 
                     var isPathElevationGainValid = isNormalRoute ? true : pathElevation.gain > 500;
                     controls.updateElevationGain(isPathElevationGainValid, pathElevation.gain);
