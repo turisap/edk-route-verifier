@@ -38,22 +38,22 @@ module.exports = function (geoJson) {
     }
 
     this.updatePathLength = function(isLengthValid, length) {
-        updateControlValue(PATH_LENGTH_ID, length.toFixed(), 'km');
+        updateControlValue(PATH_LENGTH_ID, length.toFixed(2), 'km');
         updateControlColor(PATH_LENGTH_ID, isLengthValid);
     }
 
     this.updateElevationGain = function(isElevationGainValid, elevationGain) {
-        updateControlValue(ELEVATION_GAIN_ID, elevationGain.toFixed(), 'm')
+        updateControlValue(ELEVATION_GAIN_ID, elevationGain.toFixed(2), 'm')
         updateControlColor(ELEVATION_GAIN_ID, isElevationGainValid);
     }
 
     this.updateElevationLoss = function(isElevationLossValid, elevationLoss) {
-        updateControlValue(ELEVATION_LOSS_ID, elevationLoss.toFixed(), 'm')
+        updateControlValue(ELEVATION_LOSS_ID, elevationLoss.toFixed(2), 'm')
         updateControlColor(ELEVATION_LOSS_ID, isElevationLossValid);
     }
 
     this.updateElevationTotalChange = function(isElevationTotalChangeValid, elevationTotalChange) {
-        updateControlValue(ELEVATION_TOTAL_CHANGE_ID, elevationTotalChange.toFixed(), 'm');
+        updateControlValue(ELEVATION_TOTAL_CHANGE_ID, elevationTotalChange.toFixed(2), 'm');
         updateControlColor(ELEVATION_TOTAL_CHANGE_ID, isElevationTotalChangeValid);
     }
 

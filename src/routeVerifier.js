@@ -20,11 +20,11 @@ function verifyRoute() {
 
             var routeLength = route.getPathLength();
 
-            var isNormalRoute = routeLength > 40;
+            var isNormalRoute = routeLength >= 30;
             controls.updateRouteType(isNormalRoute);
 
-            var isPathLengthValid = routeLength > 20;
-            controls.updatePathLength(isPathLengthValid, routeLength);
+            var isPathLengthValid = true;
+            controls.updatePathLength(true, routeLength);
 
             route.fetchPathElevationData()
                 .then(function() {
