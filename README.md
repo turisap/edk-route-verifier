@@ -1,17 +1,17 @@
 # edk-route-verifier
 
-###Setup:
+### Setup:
 ```$xslt
 npm install -g browserify
 npm install -g uglify-js
 ```
 
-###Proxy:
+### Proxy:
 ```$xslt
 cd proxy;
 npm start
 ```
 
-###Test:
+### Test:
 - create bundle: `npm run bundle`
 - open in browser: `test/trasa.html`
