@@ -1,3 +1,6 @@
+var Chart = require('chart.js');
+var _ = require('lodash');
+
 module.exports = function (geoJson) {
     // Constructor
 
@@ -11,6 +14,7 @@ module.exports = function (geoJson) {
     var NUMBER_OF_STATIONS_ID = 'div#numberOfStations';
     var STATIONS_ORDER_AND_NAMING_ID = 'div#updateStationsOrderAndNaming';
     var STATIONS_START_END_MARKED_ID = 'div#updateStationsStartEndMarked';
+    var ELEVATION_CHART_ID = 'canvas#elevationChart';
 
     var updateControlColor = function(element, isValid) {
         var VALID_COLOR_CLASS = 'bg-green';
@@ -66,5 +70,57 @@ module.exports = function (geoJson) {
 
     this.updateSinglePath = function(isSinglePath) {
         updateControlColor(SINGLE_PATH_ID, isSinglePath);
+    }
+
+    this.drawElevationChart = function(pathElevation) {
+        var X_AXIS_NUMBER_OF_LABELS = 10;
+        var X_AXIS_LABEL_STRING = 'Dystans [km]';
+        var Y_AXIS_LABEL_STRING = 'Wysokość [m]';
+        var CHART_BACKGROUND_COLOR = 'rgb(32, 77, 116)';
+
+        var labelWidth = parseInt(pathElevation.data.length / X_AXIS_NUMBER_OF_LABELS);
+        var labels = _.map(pathElevation.data, function(elevation) { return elevation.distance.toFixed(); });
+        var data = _.map(pathElevation.data, function(elevation) { return elevation.elevation; }) ;
+
+        var elevationChart = new Chart($(ELEVATION_CHART_ID), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '',
+                    data: data,
+                    fill: 'start',
+                    radius: 0,
+                    backgroundColor: CHART_BACKGROUND_COLOR
+                }]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: X_AXIS_LABEL_STRING
+                        },
+                        ticks: {
+                            callback: function(dataLabel, index) {
+                                return (index % labelWidth === 0) || (index === pathElevation.data.length-1) ? dataLabel : null;
+                            }
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: Y_AXIS_LABEL_STRING
+                        },
+                    }]
+                },
+                legend: {
+                    display: false,
+                },
+                tooltips: {
+                    enabled: false
+                }
+            }
+        });
     }
 }
