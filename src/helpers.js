@@ -1,4 +1,4 @@
-var _ = require('lodash');
+var _ = require('./lodash');
 var toGeoJSON = require('togeojson');
 
 function getRouteUrl(routeId, isLocal) {

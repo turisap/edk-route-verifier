@@ -1,5 +1,5 @@
 var Chart = require('chart.js');
-var _ = require('lodash');
+var _ = require('./lodash');
 
 module.exports = function (geoJson) {
     // Constructor
