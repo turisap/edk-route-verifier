@@ -141,18 +141,14 @@ module.exports = function (geoJson) {
     }
 
 
-    this.getPathLength = function(useTurf) {
+    this.getPathLength = function() {
         var result = 0;
 
-        if (useTurf) {
-            var lineDistance = require('@turf/line-distance');
-            result = lineDistance(this.path);
-        } else {
-            var googleMapsPath = helpers.getGoogleMapsPath(this.path);
-            result = google.maps.geometry.spherical.computeLength(googleMapsPath);
-        }
+        var googleMapsPath = helpers.getGoogleMapsPath(this.path);
+        result = google.maps.geometry.spherical.computeLength(googleMapsPath);
+        result = parseInt(result / 1000);
 
-        console.log('getPathLength:', result, ', method:', useTurf ? 'turf' : 'google-maps');
+        console.log('getPathLength:', result);
         return result;
     }
 

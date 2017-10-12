@@ -41,7 +41,7 @@ function getRoute(routeId, isLocal) {
 
 function getGoogleMapsPath(lineString) {
     var path = _.map(lineString.geometry.coordinates, function (element) {
-        return new google.maps.LatLng(element[0], element[1]);
+        return new google.maps.LatLng(element[1], element[0]);
     });
     return path;
 }

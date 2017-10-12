@@ -5,9 +5,10 @@ var testRouteId = [
     '9d13a0acad3ef4da05da04efba7a779e8d91f592',
     '167fb6420c15fa6f155c091bf9dde192bd7e5309',
     '56adb3f60f82870e833daaaab2301f49ab6e032b',
-    'd53606410e75db67d35bff07b49846f5d4ed0bc5']
+    'd53606410e75db67d35bff07b49846f5d4ed0bc5',
+    '167fb6420c15fa6f155c091bf9dde192bd7e5309']
 
-var routeId = '167fb6420c15fa6f155c091bf9dde192bd7e5309';
+var routeId = '9d13a0acad3ef4da05da04efba7a779e8d91f592';
 var src = 'http://rejony.edk.org.pl/api/edk/route-files/' + routeId +'/download/gps';
 
 function initMap() {
