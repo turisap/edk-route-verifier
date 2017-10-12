@@ -29,7 +29,7 @@ module.exports = function (geoJson) {
     // Constants
     var EXPECTED_NUMBER_OF_PATHS = 1;
     var EXPECTED_NUMBER_OF_STATIONS = 14;
-    var MAXIMUM_DISTANCE_FROM_STATION_TO_PATH = 25; // meters
+    var MAXIMUM_DISTANCE_FROM_STATION_TO_PATH = 100; // meters
     var MAXIMUM_DISTANCE_FROM_START_END_TO_PATH = 5; // meters
     var STATIONS_NAMING_REGEX = /^(Stacja )?(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV)$/g;
     var getStationRegex = function(stationIdRoman) {
@@ -146,9 +146,9 @@ module.exports = function (geoJson) {
 
         var googleMapsPath = helpers.getGoogleMapsPath(this.path);
         result = google.maps.geometry.spherical.computeLength(googleMapsPath);
-        result = parseInt(result / 1000);
+        result = result / 1000;
 
-        console.log('getPathLength:', result);
+        console.log('getPathLength [km]:', result);
         return result;
     }
 
