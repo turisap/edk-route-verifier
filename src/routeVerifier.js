@@ -7,12 +7,14 @@ function verifyRoute() {
     var context = new Context();
     var routeUrl = context.routeUrl;
     var isLocal = context.isLocal;
+    var controls = new Controls();
+
+    controls.addLoaderToButton();
 
     helpers.getRoute(routeUrl, isLocal)
         .then(function (data) {
             var geoJson = helpers.getGeoJSON(data);
             var route = new Route(geoJson);
-            var controls = new Controls();
 
             // Path checks
             controls.updateSinglePath(route.isSinglePath());
@@ -47,9 +49,10 @@ function verifyRoute() {
             route.areStationsOnThePath();
             controls.updateNumberOfStations(route.areAllStationsPresent());
             controls.updateStationsOrderAndNaming(route.isStationOrderCorrect(), route.isStationNamingCorrect());
-
+            controls.removeLoaderFromButton();
         }).catch(function (data, error) {
             console.error('Route fetching error. Error:', error);
+            controls.removeLoaderFromButton();
         });
 }
 

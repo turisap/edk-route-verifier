@@ -15,6 +15,7 @@ module.exports = function (geoJson) {
     var STATIONS_ORDER_AND_NAMING_ID = 'div#updateStationsOrderAndNaming';
     var STATIONS_START_END_MARKED_ID = 'div#updateStationsStartEndMarked';
     var ELEVATION_CHART_ID = 'canvas#elevationChart';
+    var VERIFY_BUTTON_ID = 'button#verifyRoute';
 
     var updateControlColor = function(element, isValid) {
         var VALID_COLOR_CLASS = 'bg-green';
@@ -122,5 +123,13 @@ module.exports = function (geoJson) {
                 }
             }
         });
+    }
+
+    this.addLoaderToButton = function() {
+        // TODO: $(VERIFY_BUTTON_ID)
+    }
+
+    this.removeLoaderFromButton = function() {
+        // TODO: $(VERIFY_BUTTON_ID)
     }
 }
