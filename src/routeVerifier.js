@@ -28,6 +28,7 @@ function verifyRoute() {
             route.fetchPathElevationData()
                 .then(function() {
                     var pathElevation = route.getPathElevation();
+                    pathElevation.enrichData(length);
 
                     var isPathElevationGainValid = isNormalRoute ? true : pathElevation.gain > 500;
                     controls.updateElevationGain(isPathElevationGainValid, pathElevation.gain);
@@ -37,6 +38,8 @@ function verifyRoute() {
 
                     var isPathElevationTotalChangeValid = true;
                     controls.updateElevationTotalChange(isPathElevationTotalChangeValid, pathElevation.totalChange);
+
+                    controls.drawElevationChart(pathElevation);
                 });
 
             // Station checks
