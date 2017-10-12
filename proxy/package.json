@@ -4,8 +4,7 @@
   "description": "",
   "main": "proxy.js",
   "scripts": {
-    "start": "node proxy.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node proxy.js"
   },
   "author": "Jakub Niezgoda",
   "license": "ISC",

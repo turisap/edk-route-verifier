@@ -1,4 +1,4 @@
-var _ = require('lodash');
+var _ = require('./lodash');
 var pointOnLine = require('@turf/point-on-line');
 var helpers = require('./helpers');
 var PathElevation = require('./PathElevation');
