@@ -1,11 +1,6 @@
 var _ = require('./lodash');
 var toGeoJSON = require('togeojson');
 
-function getRouteUrl(routeId, isLocal) {
-    var serverUrl = isLocal ? 'http://localhost:3000/' : 'http://rejony.edk.org.pl/';
-    var path = 'api/edk/route-files/' + routeId + '/download/gps';
-    return serverUrl + path;
-}
 
 function getGeoJSON(xml) {
     var geoJson = toGeoJSON.kml(xml);
@@ -35,8 +30,11 @@ function getPoints(geoJson) {
     return points;
 }
 
-function getRoute(routeId, isLocal) {
-    return $.ajax(getRouteUrl(routeId, isLocal));
+function getRoute(routeUrl, isLocal) {
+    routeUrl = isLocal
+        ? 'http://localhost:3000/' + routeUrl.replace(/^.*\/\/[^\/]+/, '')
+        : routeUrl;
+    return $.ajax(routeUrl);
 }
 
 function getGoogleMapsPath(lineString) {
