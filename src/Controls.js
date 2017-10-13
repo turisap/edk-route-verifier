@@ -16,6 +16,8 @@ module.exports = function (geoJson) {
     var STATIONS_START_END_MARKED_ID = 'div#updateStationsStartEndMarked';
     var ELEVATION_CHART_ID = 'canvas#elevationChart';
     var VERIFY_BUTTON_ID = 'button#verifyRoute';
+    var LOADER_ID = 'div#loader';
+    var LOADER_ELEMENT = '<div id="loader" class="overlay"><i class="fa fa-refresh fa-spin"></i></div>';
 
     var updateControlColor = function(element, isValid) {
         var VALID_COLOR_CLASS = 'bg-green';
@@ -126,10 +128,10 @@ module.exports = function (geoJson) {
     }
 
     this.addLoaderToButton = function() {
-        // TODO: $(VERIFY_BUTTON_ID)
+        $(VERIFY_BUTTON_ID).append(LOADER_ELEMENT);
     }
 
     this.removeLoaderFromButton = function() {
-        // TODO: $(VERIFY_BUTTON_ID)
+        $(VERIFY_BUTTON_ID + ' ' + LOADER_ID).remove();
     }
 }
