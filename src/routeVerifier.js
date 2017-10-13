@@ -1,7 +1,8 @@
+var logger = require('loglevel');
 var helpers = require('./helpers');
 var Route = require('./Route');
-var Context = require('./Context')
-var Controls = require('./Controls')
+var Context = require('./Context');
+var Controls = require('./Controls');
 
 function verifyRoute() {
     var context = new Context();
@@ -26,7 +27,7 @@ function verifyRoute() {
             controls.updateRouteType(isNormalRoute);
 
             var isPathLengthValid = true;
-            controls.updatePathLength(true, routeLength);
+            controls.updatePathLength(isPathLengthValid, routeLength);
 
             route.fetchPathElevationData()
                 .then(function() {
@@ -51,9 +52,12 @@ function verifyRoute() {
             controls.updateStationsOrderAndNaming(route.isStationOrderCorrect(), route.isStationNamingCorrect());
             controls.removeLoaderFromButton();
         }).catch(function (data, error) {
-            console.error('Route fetching error. Error:', error);
+            logger.error('Route fetching error. Error:', error);
             controls.removeLoaderFromButton();
         });
 }
+
+// Uncomment to set maximum loglevel
+// logger.enableAll();
 
 $("button#verifyRoute").bind("click", verifyRoute);

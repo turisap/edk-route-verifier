@@ -1,4 +1,5 @@
 var Chart = require('chart.js');
+var logger = require('loglevel');
 var _ = require('./lodash');
 
 module.exports = function (geoJson) {
@@ -32,6 +33,7 @@ module.exports = function (geoJson) {
     var updateControlValue = function(element, value, unit) {
         var INFO_BOX_NUMBER = 'span.info-box-number';
 
+        logger.debug('Updating control element', element, 'with:', value, unit);
         $(element + ' ' + INFO_BOX_NUMBER).html(value + ' ' + (unit ? '<small>'+unit+'</small>' : ''));
     }
 
@@ -84,6 +86,8 @@ module.exports = function (geoJson) {
         var labelWidth = parseInt(pathElevation.data.length / X_AXIS_NUMBER_OF_LABELS);
         var labels = _.map(pathElevation.data, function(elevation) { return elevation.distance.toFixed(); });
         var data = _.map(pathElevation.data, function(elevation) { return elevation.elevation; }) ;
+
+        logger.debug('Drawing elevation chart. Input:', pathElevation);
 
         var elevationChart = new Chart($(ELEVATION_CHART_ID), {
             type: 'line',
