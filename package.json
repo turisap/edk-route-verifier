@@ -14,11 +14,13 @@
   },
   "dependencies": {
     "admin-lte": "^2.4.2",
+    "chart.js": "^2.7.0",
     "font-awesome": "^4.7.0",
-    "togeojson": "^0.16.0",
-    "@turf/point-on-line": "^5.0.3",
     "lodash": "^4.17.4",
-    "chart.js": "^2.7.0"
+    "loglevel": "^1.5.1",
+    "togeojson": "^0.16.0",
+    "@turf/point-on-line": "^5.0.3"
+
   },
   "devDependencies": {
     "browserify": "^14.4.0",

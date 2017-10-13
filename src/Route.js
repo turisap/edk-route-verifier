@@ -1,3 +1,4 @@
+var logger = require('loglevel');
 var _ = require('./lodash');
 var pointOnLine = require('@turf/point-on-line');
 var helpers = require('./helpers');
@@ -55,13 +56,13 @@ module.exports = function (geoJson) {
     // Methods
     this.isSinglePath = function() {
         var result = _.isEqual(this.numberOfPaths, EXPECTED_NUMBER_OF_PATHS);
-        console.log('isSinglePath:', result, ', numberOfPaths:', this.numberOfPaths);
+        logger.debug('isSinglePath:', result, ', numberOfPaths:', this.numberOfPaths);
         return result;
     }
 
     this.areAllStationsPresent = function() {
         var result = _.isEqual(this.numberOfStations, EXPECTED_NUMBER_OF_STATIONS);
-        console.log('areAllStationsPresent:', result,', numberOfStations:', this.numberOfStations);
+        logger.debug('areAllStationsPresent:', result,', numberOfStations:', this.numberOfStations);
         return result;
     }
 
@@ -77,7 +78,7 @@ module.exports = function (geoJson) {
         })
 
         var result = _.isEmpty(invalidStations);
-        console.log('areStationsOnThePath:',result,', invalidStations:', invalidStations);
+        logger.debug('areStationsOnThePath:',result,', invalidStations:', invalidStations);
         return result;
     }
 
@@ -93,7 +94,7 @@ module.exports = function (geoJson) {
         });
 
         var result = _.isEmpty(invalidStations);
-        console.log('isStationNamingCorrect:',result,', invalidStations:', invalidStations);
+        logger.debug('isStationNamingCorrect:',result,', invalidStations:', invalidStations);
         return result;
     }
 
@@ -110,7 +111,7 @@ module.exports = function (geoJson) {
         }
 
         var result = _.isEmpty(invalidStations);
-        console.log('isStationOrderCorrect:',result,', invalidStations:', invalidStations);
+        logger.debug('isStationOrderCorrect:',result,', invalidStations:', invalidStations);
         return result;
     }
 
@@ -123,7 +124,7 @@ module.exports = function (geoJson) {
             result = false;
         }
 
-        console.log('isPathStartMarked:', result);
+        logger.debug('isPathStartMarked:', result);
         return result;
     }
 
@@ -136,7 +137,7 @@ module.exports = function (geoJson) {
             result = false;
         }
 
-        console.log('isPathEndMarked:', result);
+        logger.debug('isPathEndMarked:', result);
         return result;
     }
 
@@ -148,7 +149,7 @@ module.exports = function (geoJson) {
         result = google.maps.geometry.spherical.computeLength(googleMapsPath);
         result = result / 1000;
 
-        console.log('getPathLength [km]:', result);
+        logger.debug('getPathLength [km]:', result);
         return result;
     }
 
@@ -156,16 +157,17 @@ module.exports = function (geoJson) {
         var _this = this;
         return helpers.getPathElevations(this.path)
             .then(function(elevations) {
+                logger.debug('Path elevations:', elevations);
                 _this.pathElevation = new PathElevation(elevations);
                 return _this.pathElevation;
             })
             .catch(function(error) {
-                console.error('Path elevation data fetching error. Error:', error);
+                logger.error('Path elevation data fetching error. Error:', error);
             });
     }
 
     this.getPathElevation = function() {
-        console.log('getPathElevation:', this.pathElevation);
+        logger.debug('getPathElevation:', this.pathElevation);
         return this.pathElevation;
     }
 }

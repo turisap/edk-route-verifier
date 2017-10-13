@@ -1,11 +1,11 @@
-var _ = require('./lodash');
+var logger = require('loglevel');
 var toGeoJSON = require('togeojson');
-
+var _ = require('./lodash');
 
 function getGeoJSON(xml) {
     var geoJson = toGeoJSON.kml(xml);
 
-    console.log('GeoJSON: ', geoJson);
+    logger.log('GeoJSON: ', geoJson);
     return geoJson;
 }
 
@@ -34,6 +34,7 @@ function getRoute(routeUrl, isLocal) {
     routeUrl = isLocal
         ? 'http://localhost:3000/' + routeUrl.replace(/^.*\/\/[^\/]+/, '')
         : routeUrl;
+    logger.debug('Fetching route from:', routeUrl);
     return $.ajax(routeUrl);
 }
 
@@ -47,10 +48,13 @@ function getGoogleMapsPath(lineString) {
 function getPathElevations(lineString, useLocalElevations) {
     if (useLocalElevations && lineString.geometry.coordinates[0].length === 3) {
         // Elevation present in line string
+
+        logger.debug('Getting path elevations from line string...');
         var elevations = _.map(lineString.geometry.coordinates, function (element) {
             return {elevation: element[2]};
         });
 
+        logger.debug('Elevations:', elevations);
         return new Promise(function(resolve,reject) {
             resolve(elevations);
         })
