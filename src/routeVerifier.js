@@ -13,7 +13,7 @@ function verifyRoute() {
     controls.addLoaderToButton();
 
     helpers.getRoute(routeUrl, isLocal)
-        .then(function (data) {
+        .done(function (data) {
             var geoJson = helpers.getGeoJSON(data);
             var route = new Route(geoJson);
 
@@ -51,8 +51,8 @@ function verifyRoute() {
             controls.updateNumberOfStations(route.areAllStationsPresent());
             controls.updateStationsOrderAndNaming(route.isStationOrderCorrect(), route.isStationNamingCorrect());
             controls.removeLoaderFromButton();
-        }).catch(function (data, error) {
-            logger.error('Route fetching error. Error:', error);
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            logger.error('Route fetching error. Error:', textStatus, errorThrown);
             controls.removeLoaderFromButton();
         });
 }
