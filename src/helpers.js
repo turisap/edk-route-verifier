@@ -32,7 +32,7 @@ function getPoints(geoJson) {
 
 function getRoute(routeUrl, isLocal) {
     routeUrl = isLocal
-        ? 'http://localhost:3000/' + routeUrl.replace(/^.*\/\/[^\/]+/, '')
+        ? 'http://localhost:8080' + routeUrl.replace(/^.*\/\/[^\/]+/, '')
         : routeUrl;
     logger.debug('Fetching route from:', routeUrl);
     return $.ajax(routeUrl);
