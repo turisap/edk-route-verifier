@@ -51,6 +51,18 @@ function verifyRoute() {
                     controls.updateElevationTotalChange(isPathElevationTotalChangeValid, pathElevation.totalChange);
 
                     controls.drawElevationChart(pathElevation);
+
+                    helpers.getRouteParameters(routeUrl)
+                        .then(function(parameters) {
+                            logger.debug('Route parameters:', parameters);
+                            var isDataConsistent = (routeLength - 1 <= parameters.length && parameters.length <= routeLength + 1)
+                                                && (pathElevation.gain - 100 <= parameters.elevation && parameters.elevation <= pathElevation.gain + 100)
+                                                && (parameters.type === isNormalRoute ? 0 : 1);
+                            controls.updateDataConsistency(isDataConsistent);
+                        })
+                        .catch(function(error) {
+                            logger.error('Route parameters data fetching error.', error);
+                        })
                 })
                 .catch(function(error) {
                     logger.error('Path elevation data fetching error.', error);
@@ -58,10 +70,9 @@ function verifyRoute() {
                     controls.updateElevationLoss(false, 0);
                     controls.updateElevationTotalChange(false, 0);
                 });
-
-            controls.removeLoaderFromButton();
         }).fail(function (xhr, status) {
             logger.error('Route fetching error. Status:', status);
+        }).always(function() {
             controls.removeLoaderFromButton();
         });
 }

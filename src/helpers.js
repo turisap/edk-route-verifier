@@ -79,6 +79,21 @@ function getPathElevations(lineString, useLocalElevations) {
     }
 }
 
+function getRouteParameters(routeId) {
+    // TODO: Change to rejony-app webapi URL
+    var REQUEST_URL = 'http://localhost:8080/getRouteParameters';
+    return new Promise(function(resolve,reject) {
+        $.ajax(REQUEST_URL)
+            .done(function (data) {
+                logger.debug('Route parameters:', data);
+                resolve(data);
+            })
+            .fail(function (xhr, status) {
+                reject(status);
+            })
+    });
+}
+
 module.exports = {
     getGeoJSON: getGeoJSON,
     getNumberOfFeatures: getNumberOfFeatures,
@@ -86,5 +101,6 @@ module.exports = {
     getPoints: getPoints,
     getRoute: getRoute,
     getGoogleMapsPath: getGoogleMapsPath,
-    getPathElevations: getPathElevations
+    getPathElevations: getPathElevations,
+    getRouteParameters: getRouteParameters
 }
