@@ -1,4 +1,3 @@
-var Chart = require('chart.js');
 var logger = require('loglevel');
 var _ = require('./lodash');
 
@@ -19,15 +18,20 @@ module.exports = function (geoJson) {
     var VERIFY_BUTTON_ID = 'button#verifyRoute';
     var LOADER_ID = 'div#loader';
     var LOADER_ELEMENT = '<div id="loader" class="overlay"><i class="fa fa-refresh fa-spin"></i></div>';
+    var ELEVATION_CHART_ELEMENT = '<canvas id="elevationChart"></canvas>';
 
     var updateControlColor = function(element, isValid) {
         var VALID_COLOR_CLASS = 'bg-green';
         var INVALID_COLOR_CLASS = 'bg-yellow';
         var INFO_BOX_ICON = 'span.info-box-icon';
 
-        isValid
-            ? $(element + ' ' + INFO_BOX_ICON).removeClass(INVALID_COLOR_CLASS).addClass(VALID_COLOR_CLASS)
-            : $(element + ' ' + INFO_BOX_ICON).removeClass(VALID_COLOR_CLASS).addClass(INVALID_COLOR_CLASS);
+        if (_.isNull(isValid)) {
+            $(element + ' ' + INFO_BOX_ICON).removeClass([INVALID_COLOR_CLASS, VALID_COLOR_CLASS].join(' '))
+        } else {
+            isValid
+                ? $(element + ' ' + INFO_BOX_ICON).removeClass(INVALID_COLOR_CLASS).addClass(VALID_COLOR_CLASS)
+                : $(element + ' ' + INFO_BOX_ICON).removeClass(VALID_COLOR_CLASS).addClass(INVALID_COLOR_CLASS);
+        }
     }
 
     var updateControlValue = function(element, value, unit) {
@@ -35,6 +39,10 @@ module.exports = function (geoJson) {
 
         logger.debug('Updating control element', element, 'with:', value, unit);
         $(element + ' ' + INFO_BOX_NUMBER).html(value + ' ' + (unit ? '<small>'+unit+'</small>' : ''));
+    }
+
+    var removeControlChildren = function(element) {
+        $(ELEVATION_CHART_ID).empty();
     }
 
     // Methods
@@ -131,11 +139,34 @@ module.exports = function (geoJson) {
         });
     }
 
+    this.resetElevationChart = function() {
+        var elevationChartParentElement = $(ELEVATION_CHART_ID).parent();
+        $(ELEVATION_CHART_ID).remove();
+        elevationChartParentElement.append(ELEVATION_CHART_ELEMENT);
+    }
+
     this.addLoaderToButton = function() {
         $(VERIFY_BUTTON_ID).append(LOADER_ELEMENT);
     }
 
     this.removeLoaderFromButton = function() {
         $(VERIFY_BUTTON_ID + ' ' + LOADER_ID).remove();
+    }
+
+    this.resetAll = function() {
+        updateControlValue(ROUTE_TYPE_ID, '');
+        updateControlValue(PATH_LENGTH_ID, '');
+        updateControlColor(PATH_LENGTH_ID, null);
+        updateControlValue(ELEVATION_GAIN_ID, '')
+        updateControlColor(ELEVATION_GAIN_ID, null);
+        updateControlValue(ELEVATION_LOSS_ID, '')
+        updateControlColor(ELEVATION_LOSS_ID, null);
+        updateControlValue(ELEVATION_TOTAL_CHANGE_ID, '');
+        updateControlColor(ELEVATION_TOTAL_CHANGE_ID, null);
+        updateControlColor(NUMBER_OF_STATIONS_ID, null);
+        updateControlColor(STATIONS_ORDER_AND_NAMING_ID, null);
+        updateControlColor(STATIONS_START_END_MARKED_ID, null);
+        updateControlColor(SINGLE_PATH_ID, null);
+        this.resetElevationChart();
     }
 }

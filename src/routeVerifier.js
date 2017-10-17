@@ -10,6 +10,7 @@ function verifyRoute() {
     var isLocal = context.isLocal;
     var controls = new Controls();
 
+    controls.resetAll();
     controls.addLoaderToButton();
 
     helpers.getRoute(routeUrl, isLocal)
@@ -17,7 +18,7 @@ function verifyRoute() {
             var geoJson = helpers.getGeoJSON(data);
             var route = new Route(geoJson);
 
-            // Path checks
+            // Path basic checks
             controls.updateSinglePath(route.isSinglePath());
             controls.updatePathStartEndMarked(route.isPathStartMarked(), route.isPathEndMarked());
 
@@ -29,6 +30,12 @@ function verifyRoute() {
             var isPathLengthValid = true;
             controls.updatePathLength(isPathLengthValid, routeLength);
 
+            // Station checks
+            route.areStationsOnThePath();
+            controls.updateNumberOfStations(route.areAllStationsPresent());
+            controls.updateStationsOrderAndNaming(route.isStationOrderCorrect(), route.isStationNamingCorrect());
+
+            // Elevation checks
             route.fetchPathElevationData()
                 .then(function() {
                     var pathElevation = route.getPathElevation();
@@ -44,19 +51,22 @@ function verifyRoute() {
                     controls.updateElevationTotalChange(isPathElevationTotalChangeValid, pathElevation.totalChange);
 
                     controls.drawElevationChart(pathElevation);
+                })
+                .catch(function(error) {
+                    logger.error('Path elevation data fetching error.', error);
+                    controls.updateElevationGain(false, 0);
+                    controls.updateElevationLoss(false, 0);
+                    controls.updateElevationTotalChange(false, 0);
                 });
 
-            // Station checks
-            route.areStationsOnThePath();
-            controls.updateNumberOfStations(route.areAllStationsPresent());
-            controls.updateStationsOrderAndNaming(route.isStationOrderCorrect(), route.isStationNamingCorrect());
             controls.removeLoaderFromButton();
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-            logger.error('Route fetching error. Error:', textStatus, errorThrown);
+        }).fail(function (xhr, status) {
+            logger.error('Route fetching error. Status:', status);
             controls.removeLoaderFromButton();
         });
 }
 
+logger.setLevel('warn');
 // Uncomment to set maximum loglevel
 // logger.enableAll();
 

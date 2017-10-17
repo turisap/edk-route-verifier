@@ -162,7 +162,7 @@ module.exports = function (geoJson) {
                 return _this.pathElevation;
             })
             .catch(function(error) {
-                logger.error('Path elevation data fetching error. Error:', error);
+                throw new Error(error);
             });
     }
 
