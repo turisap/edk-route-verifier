@@ -4,7 +4,7 @@ var cors = require('cors');
 
 var app = express();
 var apiServerHost = 'http://rejony.edk.org.pl';
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8080;
 
 app.use('', cors(), function(req, res) {
     var url = apiServerHost + req.url;
