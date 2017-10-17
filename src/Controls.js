@@ -14,6 +14,7 @@ module.exports = function (geoJson) {
     var NUMBER_OF_STATIONS_ID = 'div#numberOfStations';
     var STATIONS_ORDER_AND_NAMING_ID = 'div#updateStationsOrderAndNaming';
     var STATIONS_START_END_MARKED_ID = 'div#updateStationsStartEndMarked';
+    var DATA_CONSISTENCY_ID = 'div#dataConsistency';
     var ELEVATION_CHART_ID = 'canvas#elevationChart';
     var VERIFY_BUTTON_ID = 'button#verifyRoute';
     var LOADER_ID = 'div#loader';
@@ -83,6 +84,10 @@ module.exports = function (geoJson) {
 
     this.updateSinglePath = function(isSinglePath) {
         updateControlColor(SINGLE_PATH_ID, isSinglePath);
+    }
+
+    this.updateDataConsistency = function(isDataConsistent) {
+        updateControlColor(DATA_CONSISTENCY_ID, isDataConsistent);
     }
 
     this.drawElevationChart = function(pathElevation) {
@@ -167,6 +172,7 @@ module.exports = function (geoJson) {
         updateControlColor(STATIONS_ORDER_AND_NAMING_ID, null);
         updateControlColor(STATIONS_START_END_MARKED_ID, null);
         updateControlColor(SINGLE_PATH_ID, null);
+        updateControlColor(DATA_CONSISTENCY_ID, null);
         this.resetElevationChart();
     }
 }
