@@ -7,6 +7,7 @@ var Controls = require('./Controls');
 function verifyRoute() {
     var context = new Context();
     var routeUrl = context.routeUrl;
+    var routeParamsUrl = context.routeParamsUrl;
     var isLocal = context.isLocal;
     var controls = new Controls();
 
@@ -24,9 +25,6 @@ function verifyRoute() {
 
             var routeLength = route.getPathLength();
 
-            var isNormalRoute = routeLength >= 30;
-            controls.updateRouteType(isNormalRoute);
-
             var isPathLengthValid = true;
             controls.updatePathLength(isPathLengthValid, routeLength);
 
@@ -41,8 +39,11 @@ function verifyRoute() {
                     var pathElevation = route.getPathElevation();
                     pathElevation.enrichData(routeLength);
 
-                    var isPathElevationGainValid = isNormalRoute ? true : pathElevation.gain > 500;
+                    var isPathElevationGainValid = true;
                     controls.updateElevationGain(isPathElevationGainValid, pathElevation.gain);
+
+                    var isNormalRoute = routeLength >= 40 || pathElevation.gain > 500 && routeLength >= 30;
+                    controls.updateRouteType(isNormalRoute);
 
                     var isPathElevationLossValid = true;
                     controls.updateElevationLoss(isPathElevationLossValid, pathElevation.loss);
@@ -52,12 +53,12 @@ function verifyRoute() {
 
                     controls.drawElevationChart(pathElevation);
 
-                    helpers.getRouteParameters(routeUrl)
+                    helpers.getRouteParameters(routeParamsUrl)
                         .then(function(parameters) {
                             logger.debug('Route parameters:', parameters);
                             var isDataConsistent = (routeLength - 1 <= parameters.length && parameters.length <= routeLength + 1)
                                                 && (pathElevation.gain - 100 <= parameters.elevation && parameters.elevation <= pathElevation.gain + 100)
-                                                && (parameters.type === isNormalRoute ? 0 : 1);
+                                                && (parameters.type === (isNormalRoute ? 0 : 1));
                             controls.updateDataConsistency(isDataConsistent);
                         })
                         .catch(function(error) {
@@ -79,6 +80,6 @@ function verifyRoute() {
 
 logger.setLevel('warn');
 // Uncomment to set maximum loglevel
-// logger.enableAll();
+logger.enableAll();
 
 $("button#verifyRoute").bind("click", verifyRoute);
