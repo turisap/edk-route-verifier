@@ -79,14 +79,16 @@ function getPathElevations(lineString, useLocalElevations) {
     }
 }
 
-function getRouteParameters(routeId) {
-    // TODO: Change to rejony-app webapi URL
-    var REQUEST_URL = 'http://localhost:8080/getRouteParameters';
+function getRouteParameters(routeParamsUrl) {
     return new Promise(function(resolve,reject) {
-        $.ajax(REQUEST_URL)
+        $.ajax(routeParamsUrl)
             .done(function (data) {
                 logger.debug('Route parameters:', data);
-                resolve(data);
+                if (data.success === 1) {
+                    resolve(data);
+                } else {
+                    reject('Getting route parameters failure')
+                }
             })
             .fail(function (xhr, status) {
                 reject(status);
