@@ -48,6 +48,9 @@ module.exports = function (geoJson) {
 
     // Methods
     this.updateRouteType = function(isNormalRoute) {
+        // TODO: Internationalization
+        // EN: Normalna - Extreme Way of The Cross
+        // EN: Na wzór - Route inspired by Extreme Way of the Cross
         updateControlValue(ROUTE_TYPE_ID, isNormalRoute ? 'Normalna' : 'Na wzór');
     }
 
@@ -92,8 +95,8 @@ module.exports = function (geoJson) {
 
     this.drawElevationChart = function(pathElevation) {
         var X_AXIS_NUMBER_OF_LABELS = 10;
-        var X_AXIS_LABEL_STRING = 'Dystans [km]';
-        var Y_AXIS_LABEL_STRING = 'Wysokość [m]';
+        var X_AXIS_LABEL_STRING = '[km]';
+        var Y_AXIS_LABEL_STRING = '[m]';
         var CHART_BACKGROUND_COLOR = 'rgb(32, 77, 116)';
 
         var labelWidth = parseInt(pathElevation.data.length / X_AXIS_NUMBER_OF_LABELS);

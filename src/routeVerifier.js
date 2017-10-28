@@ -56,9 +56,16 @@ function verifyRoute() {
                     helpers.getRouteParameters(routeParamsUrl)
                         .then(function(parameters) {
                             logger.debug('Route parameters:', parameters);
-                            var isDataConsistent = (routeLength - 1 <= parameters.length && parameters.length <= routeLength + 1)
-                                                && (pathElevation.gain - 100 <= parameters.elevation && parameters.elevation <= pathElevation.gain + 100)
-                                                && (parameters.type === (isNormalRoute ? 0 : 1));
+                            var ACCEPTED_ROUTE_LENGTH_DIFF = 1; //km
+                            var ACCEPTED_ELEVATION_GAIN_DIFF = 50; //m
+                            var NORMAL_ROUTE_TYPE = 0;
+                            var INSPIRED_ROUTE_TYPE = 1;
+
+                            var isDataConsistent = (routeLength - ACCEPTED_ROUTE_LENGTH_DIFF <= parameters.length &&
+                                                    parameters.length <= routeLength + ACCEPTED_ROUTE_LENGTH_DIFF)
+                                                && (pathElevation.gain - ACCEPTED_ELEVATION_GAIN_DIFF <= parameters.ascent &&
+                                                    parameters.ascent <= pathElevation.gain + ACCEPTED_ELEVATION_GAIN_DIFF)
+                                                && (parameters.type === (isNormalRoute ? NORMAL_ROUTE_TYPE : INSPIRED_ROUTE_TYPE));
                             controls.updateDataConsistency(isDataConsistent);
                         })
                         .catch(function(error) {
