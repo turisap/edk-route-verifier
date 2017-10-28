@@ -87,7 +87,7 @@ function getRouteParameters(routeParamsUrl) {
                 if (data.success === 1) {
                     resolve(data);
                 } else {
-                    reject('Getting route parameters failure')
+                    reject('Server side error: ' + data.error);
                 }
             })
             .fail(function (xhr, status) {
