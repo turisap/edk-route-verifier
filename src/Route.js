@@ -1,9 +1,11 @@
 var logger = require('loglevel');
 var _ = require('./lodash');
-var pointOnLine = require('@turf/point-on-line');
+var pointOnLine = require('@turf/point-on-line'); // TODO: Remove
 var helpers = require('./helpers');
 var PathElevation = require('./PathElevation');
+// var Stations = require('./Stations');
 
+// TODO: Remove
 function _sortPoints(points, lineString) {
     var enhancedPoints = _.map(points, function (point) {
         point.properties.nearestOnLine = pointOnLine(lineString, point, 'meters');
@@ -26,6 +28,7 @@ module.exports = function (geoJson) {
     this.path = lineString;
     this.numberOfStations = helpers.getNumberOfFeatures('Point', geoJson);
     this.stations = _sortPoints(points, lineString);
+    // this.stations = new Stations(points, lineString);
 
     // Constants
     var EXPECTED_NUMBER_OF_PATHS = 1;
