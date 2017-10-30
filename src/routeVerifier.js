@@ -21,7 +21,6 @@ function verifyRoute() {
 
             // Path basic checks
             controls.updateSinglePath(route.isSinglePath());
-            controls.updatePathStartEndMarked(route.isPathStartMarked(), route.isPathEndMarked());
 
             var routeLength = route.getPathLength();
 
@@ -29,9 +28,9 @@ function verifyRoute() {
             controls.updatePathLength(isPathLengthValid, routeLength);
 
             // Station checks
-            route.areStationsOnThePath();
             controls.updateNumberOfStations(route.areAllStationsPresent());
-            controls.updateStationsOrderAndNaming(route.isStationOrderCorrect(), route.isStationNamingCorrect());
+            controls.updateStationsOrder(route.isStationOrderCorrect());
+            controls.updateStationsOnPath(route.areStationsOnThePath());
 
             // Elevation checks
             route.fetchPathElevationData()
@@ -55,7 +54,6 @@ function verifyRoute() {
 
                     helpers.getRouteParameters(routeParamsUrl)
                         .then(function(parameters) {
-                            logger.debug('Route parameters:', parameters);
                             var ACCEPTED_ROUTE_LENGTH_DIFF = 1; //km
                             var ACCEPTED_ELEVATION_GAIN_DIFF = 50; //m
                             var NORMAL_ROUTE_TYPE = 0;

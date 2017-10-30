@@ -23,6 +23,12 @@ function getLineString(geoJson) {
     return lineString;
 }
 
+function reverseLineString(lineString) {
+    var newLineString = Object.assign({}, lineString);
+    newLineString.geometry.coordinates = lineString.geometry.coordinates.reverse();
+    return newLineString;
+}
+
 function getPoints(geoJson) {
     var points = _.filter(geoJson.features, function (feature) {
         return _.isEqual(feature.geometry.type, 'Point')
@@ -100,6 +106,7 @@ module.exports = {
     getGeoJSON: getGeoJSON,
     getNumberOfFeatures: getNumberOfFeatures,
     getLineString: getLineString,
+    reverseLineString: reverseLineString,
     getPoints: getPoints,
     getRoute: getRoute,
     getGoogleMapsPath: getGoogleMapsPath,

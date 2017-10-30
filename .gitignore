@@ -6,3 +6,4 @@ node_modules/
 
 test/routeVerifier.js
 test/routeVerifier.min.js
+devConfig.json

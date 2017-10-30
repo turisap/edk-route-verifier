@@ -246,7 +246,7 @@
                     </div>
                     <div class="box box-solid">
                         <div id="map-canvas"
-                             data-what="http://www.rejony.edk.org.pl/api/edk/route-files/56adb3f60f82870e833daaaab2301f49ab6e032b/download/gps"
+                             data-what="http://rejony.edk.org.pl/api/edk/route-files/be47e17c0444f8782e66d337f533bafa202b4146/download/gps"
                              data-route-params="/s/Eb2qrCBtKDlQ/routes/260/params"
                              style="height: 400px"></div>
                     </div>
@@ -577,9 +577,9 @@
                                     <span class="info-box-icon bg-gray-light"><i class="fa fa-map-marker"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Ilość stacji</span>
+                                        <span class="info-box-text">Ilość i nazewnictwo stacji</span>
                                         <span class="info-box-number"></span>
-                                        <span class="users-list-date">Trasa powinna liczyć 14 stacji w kótrych odmawiane są rozważania.</span>
+                                        <span class="users-list-date">Trasa powinna liczyć 14 ponumerowanych stacji.</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -587,25 +587,25 @@
                             </div>
 
                             <div class="col-md-4 col-sm-6 col-xs-12">
-                                <div id="updateStationsOrderAndNaming" class="info-box">
+                                <div id="stationsOrder" class="info-box">
                                     <span class="info-box-icon bg-gray-light"><i
                                             class="fa fa-sort-numeric-asc"></i></span>
 
                                     <div class="info-box-content">
                                         <span class="info-box-text">Kolejność stacji</span>
-                                        <span class="users-list-date">Stacje powinny być kolejno ponumerowane, kolejnymy liczbami rzymskimi (I, II,...)</span>
+                                        <span class="users-list-date">Stacje powinny być umieszczone na trasie w kolejności rosnącej.</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
                                 <!-- /.info-box -->
                             </div>
                             <div class="col-md-4 col-sm-6 col-xs-12">
-                                <div id="updateStationsStartEndMarked" class="info-box">
+                                <div id="stationsOnPath" class="info-box">
                                     <span class="info-box-icon bg-gray-light"><i class="fa fa-map-pin"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Początek, koniec trasy</span>
-                                        <span class="users-list-date">Na śladzie zaznczony powinen być punkt początkowy i końcowy.</span>
+                                        <span class="info-box-text">Rozmieszczenie stacji</span>
+                                        <span class="users-list-date">Stacje powinny być w maksymalnej odlegości 100m od śladu trasy.</span>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -679,7 +679,7 @@
 
 <script src="loadMap.js"></script>
 <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=geometry&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?libraries=geometry&callback=initMap">
 </script>
 <script src="routeVerifier.min.js"></script>
 

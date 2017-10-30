@@ -6,8 +6,8 @@ var app = express();
 var apiServerHost = 'http://rejony.edk.org.pl';
 var port = process.env.PORT || 8080;
 
-app.get('/getRouteParameters', cors(), function(req, res) {
-    var ROUTE_PARAMETERS = { length: 45, elevation: 1000, type: 0 };
+app.get('/s/Eb2qrCBtKDlQ/routes/260/params', cors(), function(req, res) {
+    var ROUTE_PARAMETERS = { success: 1, length: 45, elevation: 1000, type: 0 };
     console.log('Sending route parameters to: ', ROUTE_PARAMETERS);
     res.send(ROUTE_PARAMETERS);
 });
