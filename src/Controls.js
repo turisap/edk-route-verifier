@@ -12,8 +12,8 @@ module.exports = function (geoJson) {
     var ELEVATION_LOSS_ID = 'div#elevationLoss';
     var ELEVATION_TOTAL_CHANGE_ID = 'div#elevationTotalChange';
     var NUMBER_OF_STATIONS_ID = 'div#numberOfStations';
-    var STATIONS_ORDER_AND_NAMING_ID = 'div#updateStationsOrderAndNaming';
-    var STATIONS_START_END_MARKED_ID = 'div#updateStationsStartEndMarked';
+    var STATIONS_ORDER_ID = 'div#stationsOrder';
+    var STATIONS_ON_PATH_ID = 'div#stationsOnPath';
     var DATA_CONSISTENCY_ID = 'div#dataConsistency';
     var ELEVATION_CHART_ID = 'canvas#elevationChart';
     var VERIFY_BUTTON_ID = 'button#verifyRoute';
@@ -77,12 +77,13 @@ module.exports = function (geoJson) {
     this.updateNumberOfStations = function(areAllStationsPresent) {
         updateControlColor(NUMBER_OF_STATIONS_ID, areAllStationsPresent);
     }
-    this.updateStationsOrderAndNaming = function(isStationOrderCorrect, isStationNamingCorrect) {
-        updateControlColor(STATIONS_ORDER_AND_NAMING_ID, isStationOrderCorrect && isStationNamingCorrect);
+
+    this.updateStationsOrder = function (isStationOrderCorrect) {
+        updateControlColor(STATIONS_ORDER_ID, isStationOrderCorrect);
     }
 
-    this.updatePathStartEndMarked = function(isPathStartMarked, isPathEndMarked) {
-        updateControlColor(STATIONS_START_END_MARKED_ID, isPathStartMarked && isPathEndMarked);
+    this.updateStationsOnPath = function (areAllStationsOnPath) {
+        updateControlColor(STATIONS_ON_PATH_ID, areAllStationsOnPath);
     }
 
     this.updateSinglePath = function(isSinglePath) {
@@ -172,8 +173,8 @@ module.exports = function (geoJson) {
         updateControlValue(ELEVATION_TOTAL_CHANGE_ID, '');
         updateControlColor(ELEVATION_TOTAL_CHANGE_ID, null);
         updateControlColor(NUMBER_OF_STATIONS_ID, null);
-        updateControlColor(STATIONS_ORDER_AND_NAMING_ID, null);
-        updateControlColor(STATIONS_START_END_MARKED_ID, null);
+        updateControlColor(STATIONS_ORDER_ID, null);
+        updateControlColor(STATIONS_ON_PATH_ID, null);
         updateControlColor(SINGLE_PATH_ID, null);
         updateControlColor(DATA_CONSISTENCY_ID, null);
         this.resetElevationChart();

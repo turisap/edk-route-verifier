@@ -1,13 +1,12 @@
 var logger = require('loglevel');
 var _ = require('./lodash');
 var pointOnLine = require('@turf/point-on-line');
-var distance = require('@turf/distance');
-
 
 module.exports = function (points, lineString) {
     // Constructor
     this.points = points;
     this.path = lineString;
+    this.pathReversed = false;
 
     this._sortPoints = function() {
         var path = this.path;
@@ -82,38 +81,78 @@ module.exports = function (points, lineString) {
         });
     }
 
-    this._addStartEnd = function() {
-        var startPoints = _.filter(this.points, function (point) {
-            return point.properties.index === 0
-        });
-        var endPoints = _.filter(this.points, function (point) {
-            return point.properties.index === 15
-        });
-        if (_.isEmpty(startPoints) && _.isEmpty(endPoints)) {
-            var firstStation = _.filter(this.points, function (point) {
-                return point.properties.index === 1
-            });
-            if (!_.isEmpty(firstStation)) {
-                firstStation = firstStation[0];
-                var firstPointOnPath = this.path.geometry.coordinates[0];
-                var lastPointOnPath = this.path.geometry.coordinates[this.path.geometry.coordinates.length - 1];
-                var distanceToFirstPointOnPath = distance(firstPointOnPath, firstStation, 'meters');
-                var distanceToLastPointOnPath = distance(lastPointOnPath, firstStation, 'meters');
-                if (distanceToFirstPointOnPath < distanceToLastPointOnPath) {
-                    logger.debug('TODO: Add Start at the beginning of the path');
-                    logger.debug('TODO: Add End at the end of the path');
-                } else {
-                    logger.debug('TODO: Add Start at the end of the path');
-                    logger.debug('TODO: Add End at the start of the path');
-                    // TODO: Reverse path
-                }
+    this._updateDirection = function() {
+        var ascIndexes = 0;
+        var descIndexes = 0;
+        for(var i = 1; i < this.points.length; i++) {
+            var currentIndex = this.points[i].properties.index;
+            var previousIndex = this.points[i-1].properties.index;
+            if (currentIndex > previousIndex) {
+                ascIndexes++;
+            } else if (currentIndex < previousIndex) {
+                descIndexes++;
             }
-        } else {
-            // TODO
+        }
+        if (descIndexes > ascIndexes) {
+            logger.debug('Reversed path detected.');
+            this.pathReversed = true;
+            this.points = this.points.reverse();
         }
     }
 
     this._sortPoints();
     this._addIndexes();
-    this._addStartEnd();
+    this._updateDirection();
+
+    this.getCount = function () {
+        var numberOfStations = 0;
+        for (var stationNumber = 1; stationNumber <= 14; stationNumber++) {
+            var stationsOfNumber = _.filter(this.points, function (station) {
+                return station.properties.index === stationNumber;
+            });
+            if (stationsOfNumber.length !== 1) {
+                logger.warn('Station number ' + stationNumber + ' found ' + stationsOfNumber.length + ' times.');
+            } else {
+                logger.debug('Station number ' + stationNumber + ' found.');
+                numberOfStations++;
+            }
+        }
+        return numberOfStations;
+    }
+
+    this.isOrderCorrect = function () {
+        var result = true;
+        for(var i = 1; i < this.points.length; i++) {
+            var currentStationNumber = this.points[i].properties.index;
+            var previousStationNumber = this.points[i-1].properties.index;
+            if (currentStationNumber <= previousStationNumber) {
+                logger.warn('Detected invalid order of stations. Station number ' + currentStationNumber + ' is after station ' + previousStationNumber + '.');
+                result = false;
+            } else {
+                logger.debug('Station number ' + currentStationNumber + ' is after station ' + previousStationNumber + '.');
+            }
+        }
+        return result
+    }
+
+    this.areAllOnThePath = function(maximumDistanceFromPath) {
+        var result = true;
+
+        _.forEach(this.points, function (station) {
+            var stationNumber = station.properties.index;
+            var distanceFromStationToPath = station.properties.nearestOnLine.properties.dist;
+            if (distanceFromStationToPath > maximumDistanceFromPath) {
+                logger.warn('Station ' + stationNumber + ' is too far from path. Expected maximum distance from path: ' + maximumDistanceFromPath + ' meter(s).');
+                result = false;
+            } else {
+                logger.debug('Station ' + stationNumber + ' is on the path.');
+            }
+        });
+
+        return result;
+    }
+
+    this.isPathReversed = function() {
+        return this.pathReversed;
+    }
 }
