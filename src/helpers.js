@@ -68,8 +68,14 @@ function getPathElevations(lineString, useLocalElevations) {
         // No elevation in line string
         var path = getGoogleMapsPath(lineString);
 
+        // Optimize path array length
+        var MAXIMUM_NUMBER_OF_SAMPLES = 512;
+        var ratio = Math.ceil(path.length / MAXIMUM_NUMBER_OF_SAMPLES);
+        path = path.filter(function(value, index) {
+            return (index % ratio == 0);
+        });
+
         return new Promise(function(resolve,reject) {
-            var MAXIMUM_NUMBER_OF_SAMPLES = 512;
             var elevator = new google.maps.ElevationService;
             elevator.getElevationAlongPath({
                 'path': path,

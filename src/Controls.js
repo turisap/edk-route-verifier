@@ -48,10 +48,9 @@ module.exports = function (geoJson) {
 
     // Methods
     this.updateRouteType = function(isNormalRoute) {
-        // TODO: Internationalization
-        // EN: Normalna - Extreme Way of The Cross
-        // EN: Na wzór - Route inspired by Extreme Way of the Cross
-        updateControlValue(ROUTE_TYPE_ID, isNormalRoute ? 'Normalna' : 'Na wzór');
+        var normalRouteString = $('input#normalRouteString').attr('value');
+        var inspiredRouteString = $('input#inspiredRouteString').attr('value');
+        updateControlValue(ROUTE_TYPE_ID, isNormalRoute ? normalRouteString : inspiredRouteString);
     }
 
     this.updatePathLength = function(isLengthValid, length) {

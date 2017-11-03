@@ -75,6 +75,7 @@ function verifyRoute() {
                     controls.updateElevationGain(false, 0);
                     controls.updateElevationLoss(false, 0);
                     controls.updateElevationTotalChange(false, 0);
+                    controls.updateDataConsistency(false);
                 });
         }).fail(function (xhr, status) {
             logger.error('Route fetching error. Status:', status);
