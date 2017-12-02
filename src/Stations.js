@@ -36,8 +36,10 @@ module.exports = function (points, lineString) {
 
             var index = null;
 
+            logger.debug('Checking station index for string: ' + str);
+
             // split
-            var parts = str.split(SPLITTER_REGEX);
+            var parts = str.trim().split(SPLITTER_REGEX);
 
             _.forEach(parts, function (part) {
                 // try roman numbers
@@ -107,13 +109,19 @@ module.exports = function (points, lineString) {
     this.getCount = function () {
         var numberOfStations = 0;
         for (var stationNumber = 1; stationNumber <= 14; stationNumber++) {
+            var firstStationName = '';
             var stationsOfNumber = _.filter(this.points, function (station) {
-                return station.properties.index === stationNumber;
+                if (station.properties.index === stationNumber) {
+                    firstStationName = station.properties.name;
+                    return true;
+                } else {
+                    return false;
+                }
             });
             if (stationsOfNumber.length !== 1) {
-                logger.warn('Station number ' + stationNumber + ' found ' + stationsOfNumber.length + ' times.');
+                logger.warn('Station ' + stationNumber + ' found ' + stationsOfNumber.length + ' times.');
             } else {
-                logger.debug('Station number ' + stationNumber + ' found.');
+                logger.debug('Station ' + stationNumber + ' found. Station name: ' + firstStationName);
                 numberOfStations++;
             }
         }
@@ -125,11 +133,16 @@ module.exports = function (points, lineString) {
         for(var i = 1; i < this.points.length; i++) {
             var currentStationNumber = this.points[i].properties.index;
             var previousStationNumber = this.points[i-1].properties.index;
-            if (currentStationNumber <= previousStationNumber) {
-                logger.warn('Detected invalid order of stations. Station number ' + currentStationNumber + ' is after station ' + previousStationNumber + '.');
+            logger.debug('Point ' + (i-1));
+            if (currentStationNumber === null) {
+                logger.debug('Not checking order for unrecognized point: ' + this.points[i].properties.name);
+            } else if (previousStationNumber === null) {
+                logger.debug('Not checking order for unrecognized point: ' + this.points[i-1].properties.name);
+            } else if (currentStationNumber <= previousStationNumber) {
+                logger.warn('Detected invalid order of stations. Station ' + currentStationNumber + ' is after station ' + previousStationNumber + '.');
                 result = false;
             } else {
-                logger.debug('Station number ' + currentStationNumber + ' is after station ' + previousStationNumber + '.');
+                logger.debug('Station ' + currentStationNumber + ' is after station ' + previousStationNumber + '.');
             }
         }
         return result
@@ -138,10 +151,13 @@ module.exports = function (points, lineString) {
     this.areAllOnThePath = function(maximumDistanceFromPath) {
         var result = true;
 
-        _.forEach(this.points, function (station) {
+        _.forEach(this.points, function (station, index) {
             var stationNumber = station.properties.index;
             var distanceFromStationToPath = station.properties.nearestOnLine.properties.dist;
-            if (distanceFromStationToPath > maximumDistanceFromPath) {
+            logger.debug('Point ' + index);
+            if (stationNumber === null) {
+                logger.debug('Not checking distance for: ' + station.properties.name);
+            } else if (distanceFromStationToPath > maximumDistanceFromPath) {
                 logger.warn('Station ' + stationNumber + ' is too far from path. Expected maximum distance from path: ' + maximumDistanceFromPath + ' meter(s).');
                 result = false;
             } else {
