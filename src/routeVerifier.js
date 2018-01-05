@@ -6,21 +6,19 @@ var Controls = require('./Controls');
 
 function verifyRoute() {
     var context = new Context();
-    var routeUrl = context.routeUrl;
-    var routeParamsUrl = context.routeParamsUrl;
-    var isLocal = context.isLocal;
     var controls = new Controls();
 
     controls.resetAll();
     controls.addLoaderToButton();
 
-    helpers.getRoute(routeUrl, isLocal)
+    helpers.getRoute(context.routeUrl, context.isLocal)
         .done(function (data) {
             var geoJson = helpers.getGeoJSON(data);
             var route = new Route(geoJson);
 
             // Path basic checks
-            controls.updateSinglePath(route.isSinglePath());
+            var isSinglePath = route.isSinglePath();
+            controls.updateSinglePath(isSinglePath);
 
             var routeLength = route.getPathLength();
 
@@ -28,9 +26,12 @@ function verifyRoute() {
             controls.updatePathLength(isPathLengthValid, routeLength);
 
             // Station checks
-            controls.updateNumberOfStations(route.areAllStationsPresent());
-            controls.updateStationsOrder(route.isStationOrderCorrect());
-            controls.updateStationsOnPath(route.areStationsOnThePath());
+            var areAllStationsPresent = route.areAllStationsPresent();
+            controls.updateNumberOfStations(areAllStationsPresent);
+            var isStationOrderCorrect = route.isStationOrderCorrect();
+            controls.updateStationsOrder(isStationOrderCorrect);
+            var areStationsOnThePath = route.areStationsOnThePath();
+            controls.updateStationsOnPath(areStationsOnThePath);
 
             // Elevation checks
             route.fetchPathElevationData()
@@ -52,19 +53,43 @@ function verifyRoute() {
 
                     controls.drawElevationChart(pathElevation);
 
-                    helpers.getRouteParameters(routeParamsUrl)
+                    helpers.getRouteParameters(context.routeParamsUrl)
                         .then(function(parameters) {
                             var ACCEPTED_ROUTE_LENGTH_DIFF = 1; //km
                             var ACCEPTED_ELEVATION_GAIN_DIFF = 50; //m
                             var NORMAL_ROUTE_TYPE = 0;
                             var INSPIRED_ROUTE_TYPE = 1;
-
-                            var isDataConsistent = (routeLength - ACCEPTED_ROUTE_LENGTH_DIFF <= parameters.length &&
-                                                    parameters.length <= routeLength + ACCEPTED_ROUTE_LENGTH_DIFF)
-                                                && (pathElevation.gain - ACCEPTED_ELEVATION_GAIN_DIFF <= parameters.ascent &&
-                                                    parameters.ascent <= pathElevation.gain + ACCEPTED_ELEVATION_GAIN_DIFF)
-                                                && (parameters.type === (isNormalRoute ? NORMAL_ROUTE_TYPE : INSPIRED_ROUTE_TYPE));
+                            
+                            var isLengthConsistent = (routeLength - ACCEPTED_ROUTE_LENGTH_DIFF <= parameters.length &&
+                                                      parameters.length <= routeLength + ACCEPTED_ROUTE_LENGTH_DIFF);
+                            var isElevationGainConsistent = (pathElevation.gain - ACCEPTED_ELEVATION_GAIN_DIFF <= parameters.ascent &&
+                                                             parameters.ascent <= pathElevation.gain + ACCEPTED_ELEVATION_GAIN_DIFF);
+                            var isRouteTypeConsistent = parameters.type === (isNormalRoute ? NORMAL_ROUTE_TYPE : INSPIRED_ROUTE_TYPE);
+                            var isDataConsistent = isLengthConsistent && isElevationGainConsistent && isRouteTypeConsistent;
+                            
+                            logger.debug('isLengthConsistent:', isLengthConsistent,
+                                         ', isElevationGainConsistent:', isElevationGainConsistent, 
+                                         ', isRouteTypeConsistent:', isRouteTypeConsistent); 
                             controls.updateDataConsistency(isDataConsistent);
+
+                            var canRouteBeAutomaticallyApproved = 
+                                isPathLengthValid && isPathLengthValid && 
+                                areAllStationsPresent && isStationOrderCorrect && areStationsOnThePath && 
+                                isPathElevationGainValid && isPathElevationLossValid && isPathElevationTotalChangeValid &&
+                                isDataConsistent;
+                            
+                            if (canRouteBeAutomaticallyApproved) {
+                                logger.info('Route verification success. Approving...');
+                                helpers.approveRoute(context.routeApproveUrl)
+                                    .then(function() {
+                                        logger.info('Route approved.');
+                                    })
+                                    .catch(function(error) {
+                                        logger.error('Route approval error.', error);
+                                    })
+                            } else {
+                                logger.info('Route verification failed. Cannot be approved.');
+                            }
                         })
                         .catch(function(error) {
                             logger.error('Route parameters data fetching error.', error);

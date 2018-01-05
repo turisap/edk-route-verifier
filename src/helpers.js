@@ -108,6 +108,18 @@ function getRouteParameters(routeParamsUrl) {
     });
 }
 
+function approveRoute(routeApproveUrl) {
+    return new Promise(function(resolve,reject) {
+        $.ajax(routeApproveUrl)
+            .done(function (data) {
+                resolve({success: true});
+            })
+            .fail(function (xhr, status) {
+                reject(status);
+            })
+    });
+}
+
 module.exports = {
     getGeoJSON: getGeoJSON,
     getNumberOfFeatures: getNumberOfFeatures,
@@ -117,5 +129,6 @@ module.exports = {
     getRoute: getRoute,
     getGoogleMapsPath: getGoogleMapsPath,
     getPathElevations: getPathElevations,
-    getRouteParameters: getRouteParameters
+    getRouteParameters: getRouteParameters,
+    approveRoute: approveRoute
 }
