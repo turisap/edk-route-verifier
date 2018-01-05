@@ -37,6 +37,11 @@ module.exports = function (points, lineString) {
             var index = null;
 
             logger.debug('Checking station index for string: ' + str);
+            
+            // noname station
+            if (!str) {
+                return index;
+            }
 
             // split
             var parts = str.trim().split(SPLITTER_REGEX);
