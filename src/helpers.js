@@ -1,11 +1,15 @@
 var logger = require('loglevel');
 var toGeoJSON = require('togeojson');
+var flatten = require('@turf/flatten');
 var _ = require('./lodash');
 
 function getGeoJSON(xml) {
     var geoJson = toGeoJSON.kml(xml);
-
     logger.log('GeoJSON: ', geoJson);
+
+    geoJson = flatten(geoJson);
+    logger.log('GeoJSON Flattened: ', geoJson);
+
     return geoJson;
 }
 
