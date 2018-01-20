@@ -110,16 +110,13 @@ module.exports = function (points, lineString) {
     this._sortPoints();
     this._addIndexes();
     this._updateDirection();
-    logger.debug('Points: ', this.points);
-
+    
     this.getCount = function () {
         var numberOfStations = 0;
         for (var stationNumber = 1; stationNumber <= 14; stationNumber++) {
             var firstStationName = '';
             var stationsOfNumber = _.filter(this.points, function (station) {
                 if (station.properties.index === stationNumber) {
-                    logger.debug('Match: ', station.properties.index);
-                    logger.debug('Match: ', stationNumber);
                     firstStationName = station.properties.name;
                     return true;
                 } else {

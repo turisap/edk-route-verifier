@@ -3,13 +3,17 @@ var toGeoJSON = require('togeojson');
 var flatten = require('@turf/flatten');
 var _ = require('./lodash');
 
-function getGeoJSON(xml) {
-    var geoJson = toGeoJSON.kml(xml);
-    logger.log('GeoJSON: ', geoJson);
-
+function getGeoJSON(kml) {
+    var extendedData = kml.getElementsByTagName("ExtendedData");
+    for (var index = extendedData.length - 1; index >= 0; index--) {
+        extendedData[index].parentNode.removeChild(extendedData[index]);
+    }
+    logger.log('KML (no ExtendedData):', kml);
+        
+    var geoJson = toGeoJSON.kml(kml);
     geoJson = flatten(geoJson);
-    logger.log('GeoJSON Flattened: ', geoJson);
-
+    logger.log('GeoJSON (flatten): ', geoJson);
+    
     return geoJson;
 }
 
