@@ -27,7 +27,7 @@ module.exports = function (points, lineString) {
             var START_NAMES_REGEX = /^(wstęp|wprowadzenie|początek|start)$/ig;
             var END_NAMES_REGEX = /^(zakończenia|koniec|podsumowanie)$/ig;
             var ROMAN_NUMBERS_REGEX = /^(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV)$/g;
-            var EUROPEAN_NUMBERS_REGEX = /^1[0-4]|[1-9]$/g;
+            var EUROPEAN_NUMBERS_REGEX = /^(1[0-4]|[1-9])$/g;
             var SPLITTER_REGEX = /[ ,\._\-:;]+/;
             var ROMAN_EUROPEAN_MAP = {
                 'I': 1, 'II': 2, 'III': 3, 'IV': 4, 'V': 5, 'VI': 6, 'VII': 7,
@@ -75,7 +75,7 @@ module.exports = function (points, lineString) {
                     return false;
                 }
             });
-
+            
             return index;
         }
 
@@ -110,6 +110,7 @@ module.exports = function (points, lineString) {
     this._sortPoints();
     this._addIndexes();
     this._updateDirection();
+    logger.debug('Points: ', this.points);
 
     this.getCount = function () {
         var numberOfStations = 0;
@@ -117,6 +118,8 @@ module.exports = function (points, lineString) {
             var firstStationName = '';
             var stationsOfNumber = _.filter(this.points, function (station) {
                 if (station.properties.index === stationNumber) {
+                    logger.debug('Match: ', station.properties.index);
+                    logger.debug('Match: ', stationNumber);
                     firstStationName = station.properties.name;
                     return true;
                 } else {
