@@ -77,17 +77,25 @@ function getPathElevations(lineString, useLocalElevations) {
         var path = getGoogleMapsPath(lineString);
 
         // Optimize path array length
+        // This is done to send no more than MAXIMUM_NUMBER_OF_LATLNG_OBJECTS coordinates in KML path
         var MAXIMUM_NUMBER_OF_SAMPLES = 512;
-        var ratio = Math.ceil(path.length / MAXIMUM_NUMBER_OF_SAMPLES);
-        path = path.filter(function(value, index) {
-            return (index % ratio == 0);
-        });
+        var MAXIMUM_NUMBER_OF_LATLNG_OBJECTS = 2048;
+        logger.debug('Number of LatLng objects:', path.length);
+        if (path.length > MAXIMUM_NUMBER_OF_LATLNG_OBJECTS) {
+            var optimizedPath = [];
+            var delta = parseFloat(path.length / MAXIMUM_NUMBER_OF_LATLNG_OBJECTS);
+            for (var i = 0; i < path.length; i = i + delta) {
+                optimizedPath.push(path[Math.floor(i)]);
+            }
+            path = optimizedPath;
+            logger.debug('Number of LatLng objects after optimization:', path.length);
+        }
 
         return new Promise(function(resolve,reject) {
             var elevator = new google.maps.ElevationService;
             elevator.getElevationAlongPath({
                 'path': path,
-                'samples': _.min([path.length, MAXIMUM_NUMBER_OF_SAMPLES])
+                'samples': MAXIMUM_NUMBER_OF_SAMPLES
             }, function(elevations, status) {
                 if (status === google.maps.ElevationStatus.OK) {
                     resolve(elevations);
