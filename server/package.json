@@ -2,15 +2,16 @@
   "name": "proxy",
   "version": "1.0.0",
   "description": "",
-  "main": "proxy.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node proxy.js"
+    "start": "node server.js -c ./config.json"
   },
   "author": "Jakub Niezgoda",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.1",
     "request": "^2.83.0",
-    "cors": "^2.8.4"
+    "cors": "^2.8.4",
+    "ejs": "^2.5.7"
   }
 }

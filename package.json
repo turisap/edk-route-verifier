@@ -4,7 +4,7 @@
   "description": "",
   "main": "routeVerifier.js",
   "scripts": {
-    "bundle": "browserify src/routeVerifier.js > test/routeVerifier.js && uglifyjs test/routeVerifier.js > test/routeVerifier.min.js"
+    "bundle": "browserify src/routeVerifier.js > server/static/js/routeVerifier.js && uglifyjs server/static/js/routeVerifier.js > server/static/js/routeVerifier.min.js"
   },
   "author": "Jakub Niezgoda",
   "license": "ISC",
