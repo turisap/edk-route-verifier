@@ -11,15 +11,13 @@ cd server && npm install
 
 ### Server
 - create `config.json` file in `server` directory (see `server/config.json.template`)
-- build edk-route-verifier bundle: `npm run bundle`
-- start server: `cd server && npm start`
-- open in browser: `http://localhost:8080`
+- start server: `npm start`
+- open in browser: `http://localhost:7777`
 
 ### Test
 #### Run
-- download [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/) and put `chromedriver.exe` (for Windows) or `chromedriver` (for Linux) in `test/bin` directory
-- download [Selenium Standalone Server](http://www.seleniumhq.org/download/), rename jar to `selenium-server-standalone.jar` and put JAR file in `test/bin` directory
-- 
+- start server: `npm start`
+- start tests: `npm test`
 #### Add
 - put `<route_id>.kml` (input KML file) and `<route_id>_route_params.json` (route parameters response JSON) files in test/resources directory
-- open in browser: `http://localhost:8080/<route_id>`
+- open in browser: `http://localhost:7777/<route_id>`
