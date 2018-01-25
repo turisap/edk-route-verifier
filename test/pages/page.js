@@ -18,10 +18,12 @@ module.exports = {
         {
             navigate: navigateToRoute,
             verifyRoute: function() {
-                return this
-                    .waitForElementNotPresent('@verifyRouteButtonLoader')
+                this.waitForElementNotPresent('@verifyRouteButtonLoader')
                     .click('@verifyRouteButton')
-                    .waitForElementNotPresent('@verifyRouteButtonLoader');
+                    .waitForElementNotPresent('@verifyRouteButtonLoader')
+                    .api.pause(1000); // FIXME: Find another way
+
+                return this;
             },
             assertSinglePath: function(isSingle) {
                 this.log('Single path verification. Expecting path:', isSingle ? 'single' : 'not single');

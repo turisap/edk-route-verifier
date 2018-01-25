@@ -14,9 +14,9 @@ module.exports = {
             .assertNumberOfStations(true)
             .assertStationsOrder(true)
             .assertStationsOnPath(true)
-            .assertElevationGain(240, 20)
-            .assertElevationLoss(280, 20)
-            .assertElevationTotalChange(520, 20)
+            .assertElevationGain(300, 20)
+            .assertElevationLoss(340, 20)
+            .assertElevationTotalChange(650, 20)
             .assertDataConsistency(true);
     },
 
@@ -25,7 +25,6 @@ module.exports = {
 
     'Positive test - circular route': function (client) {
     },
-
 
     after: function(client) {
         client.end();

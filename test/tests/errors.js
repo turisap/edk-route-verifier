@@ -1,4 +1,9 @@
 module.exports = {
+
+    before : function(client) {
+
+    },
+
     'Route fetching error': function (client) {
     },
 
@@ -9,5 +14,9 @@ module.exports = {
     },
 
     'Route approval error': function (client) {
+    },
+
+    after: function(client) {
+        client.end();
     }
 };

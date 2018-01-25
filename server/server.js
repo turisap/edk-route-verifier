@@ -55,7 +55,7 @@ app.get('/:routeId', function(req, res) {
 
 app.get('/route-params/:routeId', cors(), function(req, res) {
     var id = req.params.routeId;
-    var routeParams = require(path.resolve(path.join(configuration.resourcesPath, `${id}_route-params.json`)));
+    var routeParams = JSON.parse(fs.readFileSync(path.resolve(path.join(configuration.resourcesPath, `${id}_route-params.json`)), 'utf8'));
     console.log(`Sending route ${id} parameters: `, routeParams);
     res.json(routeParams);
 });
