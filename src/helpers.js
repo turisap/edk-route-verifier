@@ -44,10 +44,7 @@ function getPoints(geoJson) {
     return points;
 }
 
-function getRoute(routeUrl, isLocal) {
-    routeUrl = isLocal
-        ? 'http://localhost:8080' + routeUrl.replace(/^.*\/\/[^\/]+/, '')
-        : routeUrl;
+function getRoute(routeUrl) {
     logger.debug('Fetching route from:', routeUrl);
     return $.ajax(routeUrl);
 }

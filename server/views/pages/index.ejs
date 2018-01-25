@@ -64,31 +64,7 @@
 
         <!-- Main content -->
         <section class="content">
-            <!-- Info boxes -->
-            <div class="row">
-                <!-- /.col -->
-                <div class="col-md-12">
-                    <div class="box box-solid">
-                        <div class="box-header with-border">
-                            <h3 class="box-title"><i class="fa fa-check"></i> Wizualizacja trasy</h3>
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div id="map-canvas"
-                             data-what="http://localhost:8080/kml/<%= routeId %>"
-                             data-route-params="http://localhost:8080/route-params/<%= routeId %>"
-                             data-route-approve="http://localhost:8080/route-approve/<%= routeId %>"
-                             style="height: 400px">
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-            <!-- /.row -->
+            <!-- row -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="box box-solid">
@@ -241,6 +217,30 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <!-- row -->
+            <div class="row">
+                <!-- /.col -->
+                <div class="col-md-12">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-check"></i> Wizualizacja trasy</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="map-canvas"
+                             data-what="http://localhost:<%= serverPort %>/kml/<%= routeId %>"
+                             data-route-params="http://localhost:<%= serverPort %>/route-params/<%= routeId %>"
+                             data-route-approve="http://localhost:<%= serverPort %>/route-approve/<%= routeId %>"
+                             style="height: 400px">
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </section>

@@ -16,5 +16,10 @@ cd server && npm install
 - open in browser: `http://localhost:8080`
 
 ### Test
+#### Run
+- download [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/) and put `chromedriver.exe` (for Windows) or `chromedriver` (for Linux) in `test/bin` directory
+- download [Selenium Standalone Server](http://www.seleniumhq.org/download/), rename jar to `selenium-server-standalone.jar` and put JAR file in `test/bin` directory
+- 
+#### Add
 - put `<route_id>.kml` (input KML file) and `<route_id>_route_params.json` (route parameters response JSON) files in test/resources directory
 - open in browser: `http://localhost:8080/<route_id>`

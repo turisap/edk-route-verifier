@@ -5,7 +5,7 @@ var fs = require('fs');
 var cors = require('cors');
 
 var app = express();
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 7777;
 var configuration = null;
 
 var displayUsage = () => {
@@ -48,7 +48,8 @@ app.get('/:routeId', function(req, res) {
     var id = req.params.routeId;
     res.render('pages/index', {
         googleMapsApiUrl: configuration.googleMapsApiUrl,
-        routeId: id
+        routeId: id,
+        serverPort: port
     });
 });
 

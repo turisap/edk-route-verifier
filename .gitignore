@@ -9,3 +9,4 @@ node_modules/
 /server/package-lock.json
 /server/static/js/routeVerifier.js
 /server/static/js/routeVerifier.min.js
+/test/screenshots/

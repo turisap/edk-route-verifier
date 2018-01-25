@@ -11,7 +11,7 @@ function verifyRoute() {
     controls.resetAll();
     controls.addLoaderToButton();
 
-    helpers.getRoute(context.routeUrl, context.isLocal)
+    helpers.getRoute(context.routeUrl)
         .done(function (data) {
             var geoJson = helpers.getGeoJSON(data);
             var route = new Route(geoJson);
