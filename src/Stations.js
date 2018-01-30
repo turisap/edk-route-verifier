@@ -1,17 +1,16 @@
 var logger = require('loglevel');
 var _ = require('./lodash');
-var pointOnLine = require('@turf/point-on-line');
+var turf = {
+    pointOnLine: require('@turf/point-on-line'),
+    distance: require('@turf/distance'),
+    helpers: require('@turf/helpers')
+};
 
 module.exports = function (points, lineString) {
-    // Constructor
-    this.points = points;
-    this.path = lineString;
-    this.pathReversed = false;
-
     this._sortPoints = function() {
         var path = this.path;
         var enhancedPoints = _.map(this.points, function (point) {
-            point.properties.nearestOnLine = pointOnLine(path, point, 'meters');
+            point.properties.nearestOnLine = turf.pointOnLine(path, point, 'meters');
             return point;
         });
 
@@ -107,10 +106,21 @@ module.exports = function (points, lineString) {
         }
     }
 
-    this._sortPoints();
-    this._addIndexes();
-    this._updateDirection();
-    
+    this._updateCircularity = function() {
+        var MAXIMUM_DISTANCE_START_END_IN_CIRCULAR_PATH = 500; // meters
+        var pathStart = turf.helpers.point(this.path.geometry.coordinates[0]);
+        var pathEnd = turf.helpers.point(this.path.geometry.coordinates[this.path.geometry.coordinates.length-1]);
+        var options = {units: 'kilometers'};
+
+        var distance = turf.distance(pathStart, pathEnd, options);
+        distance = distance*1000;
+
+        if (distance <= MAXIMUM_DISTANCE_START_END_IN_CIRCULAR_PATH) {
+            logger.debug('Circular path detected. Distance between path start and end points:', distance.toFixed(2), 'meters.');
+            this.pathCircular = true;
+        }
+    }
+
     this.getCount = function () {
         var numberOfStations = 0;
         for (var stationNumber = 1; stationNumber <= 14; stationNumber++) {
@@ -143,6 +153,14 @@ module.exports = function (points, lineString) {
                 logger.debug('Not checking order for unrecognized point: ' + this.points[i].properties.name);
             } else if (previousStationNumber === null) {
                 logger.debug('Not checking order for unrecognized point: ' + this.points[i-1].properties.name);
+            } else if (this.pathCircular &&
+                       (
+                        (previousStationNumber === 1 && currentStationNumber === 14) ||
+                        (currentStationNumber === 1 && previousStationNumber === 14)
+                       )
+                      )
+            {
+                logger.debug('Not checking order for station 1 and 14 when route is circular.');
             } else if (currentStationNumber <= previousStationNumber) {
                 logger.warn('Detected invalid order of stations. Station ' + currentStationNumber + ' is after station ' + previousStationNumber + '.');
                 result = false;
@@ -176,4 +194,15 @@ module.exports = function (points, lineString) {
     this.isPathReversed = function() {
         return this.pathReversed;
     }
+
+    // Constructor
+    this.points = points;
+    this.path = lineString;
+    this.pathReversed = false;
+    this.pathCircular = false;
+
+    this._sortPoints();
+    this._addIndexes();
+    this._updateDirection();
+    this._updateCircularity();
 }

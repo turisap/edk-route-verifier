@@ -161,21 +161,24 @@ module.exports = function (geoJson) {
         $(VERIFY_BUTTON_ID + ' ' + LOADER_ID).remove();
     }
 
-    this.resetAll = function() {
-        updateControlValue(ROUTE_TYPE_ID, '');
-        updateControlValue(PATH_LENGTH_ID, '');
-        updateControlColor(PATH_LENGTH_ID, null);
-        updateControlValue(ELEVATION_GAIN_ID, '')
-        updateControlColor(ELEVATION_GAIN_ID, null);
-        updateControlValue(ELEVATION_LOSS_ID, '')
-        updateControlColor(ELEVATION_LOSS_ID, null);
-        updateControlValue(ELEVATION_TOTAL_CHANGE_ID, '');
-        updateControlColor(ELEVATION_TOTAL_CHANGE_ID, null);
-        updateControlColor(NUMBER_OF_STATIONS_ID, null);
-        updateControlColor(STATIONS_ORDER_ID, null);
-        updateControlColor(STATIONS_ON_PATH_ID, null);
-        updateControlColor(SINGLE_PATH_ID, null);
-        updateControlColor(DATA_CONSISTENCY_ID, null);
+    this.resetAll = function(value) {
+        var text = '';
+        var isValid = value === undefined ? null : value;
+
+        updateControlValue(ROUTE_TYPE_ID, text);
+        updateControlValue(PATH_LENGTH_ID, text);
+        updateControlColor(PATH_LENGTH_ID, isValid);
+        updateControlValue(ELEVATION_GAIN_ID, text)
+        updateControlColor(ELEVATION_GAIN_ID, isValid);
+        updateControlValue(ELEVATION_LOSS_ID, text)
+        updateControlColor(ELEVATION_LOSS_ID, isValid);
+        updateControlValue(ELEVATION_TOTAL_CHANGE_ID, text);
+        updateControlColor(ELEVATION_TOTAL_CHANGE_ID, isValid);
+        updateControlColor(NUMBER_OF_STATIONS_ID, isValid);
+        updateControlColor(STATIONS_ORDER_ID, isValid);
+        updateControlColor(STATIONS_ON_PATH_ID, isValid);
+        updateControlColor(SINGLE_PATH_ID, isValid);
+        updateControlColor(DATA_CONSISTENCY_ID, isValid);
         this.resetElevationChart();
     }
 }
