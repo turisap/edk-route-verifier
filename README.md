@@ -1,4 +1,6 @@
 # edk-route-verifier
+[![CircleCI](https://circleci.com/gh/cloudify-cosmo/cloudify-stage.svg?style=svg)](https://circleci.com/gh/qooban/edk-route-verifier)
+
 
 ### Setup
 ```$xslt
