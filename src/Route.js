@@ -5,20 +5,16 @@ var PathElevation = require('./PathElevation');
 var Stations = require('./Stations');
 
 module.exports = function (geoJson) {
-    // Constructor
-    var lineString = helpers.getLineString(geoJson);
-    var points = helpers.getPoints(geoJson);
-
-    this.numberOfPaths = helpers.getNumberOfFeatures('LineString', geoJson);
-    this.stations = new Stations(points, lineString);
-    this.path = this.stations.isPathReversed() ? helpers.reverseLineString(lineString) : lineString;
-
     // Constants
     var EXPECTED_NUMBER_OF_PATHS = 1;
     var EXPECTED_NUMBER_OF_STATIONS = 14;
     var MAXIMUM_DISTANCE_FROM_STATION_TO_PATH = 100; // meters
 
     // Methods
+    this.isVerifiable = function() {
+        return this.isRouteVerifiable;
+    }
+
     this.isSinglePath = function() {
         var result = _.isEqual(this.numberOfPaths, EXPECTED_NUMBER_OF_PATHS);
         logger.debug('isSinglePath:', result, ', numberOfPaths:', this.numberOfPaths);
@@ -72,4 +68,25 @@ module.exports = function (geoJson) {
         logger.debug('getPathElevation:', this.pathElevation);
         return this.pathElevation;
     }
+
+    // Constructor
+    var lineString = helpers.getLineString(geoJson);
+    var points = helpers.getPoints(geoJson);
+
+    this.isRouteVerifiable = true;
+    if(_.isEmpty(lineString)) {
+        logger.error('No line string in route.')
+        this.isRouteVerifiable = false;
+    }
+    if(_.isEmpty(points)) {
+        logger.error('No points in route.')
+        this.isRouteVerifiable = false;
+    }
+    if(!this.isRouteVerifiable) {
+        return;
+    }
+
+    this.numberOfPaths = helpers.getNumberOfFeatures('LineString', geoJson);
+    this.stations = new Stations(points, lineString);
+    this.path = this.stations.isPathReversed() ? helpers.reverseLineString(lineString) : lineString;
 }

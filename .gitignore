@@ -4,9 +4,8 @@ node_modules/
 # WebStorm Project File
 .idea
 
-/package-lock.json
 /server/config.json
-/server/package-lock.json
 /server/static/js/routeVerifier.js
 /server/static/js/routeVerifier.min.js
 /test/screenshots/
+/test/reports/

@@ -16,6 +16,12 @@ function verifyRoute() {
             var geoJson = helpers.getGeoJSON(data);
             var route = new Route(geoJson);
 
+            if (!route.isVerifiable()) {
+                logger.error('Critical error. Route is unverifiable.')
+                controls.resetAll(false);
+                return;
+            }
+
             // Path basic checks
             var isSinglePath = route.isSinglePath();
             controls.updateSinglePath(isSinglePath);
