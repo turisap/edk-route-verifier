@@ -4,7 +4,8 @@
 
 ### Setup
 #### Prerequisities
-[NodeJS](https://nodejs.org)  >= v8.x
+* [NodeJS](https://nodejs.org)  >= v8.x
+* [Google API Key](https://developers.google.com/maps/documentation/javascript/get-api-key)
 
 #### Dependencies
 1. Install the following packages globally:
