@@ -4,8 +4,9 @@
 
 ### Setup
 #### Prerequisities
+* [Git](https://git-scm.com)
 * [NodeJS](https://nodejs.org)  >= v8.x
-* [Google API Key](https://developers.google.com/maps/documentation/javascript/get-api-key)
+* [Google Maps API Key](https://developers.google.com/maps/documentation/javascript/get-api-key)
 
 #### Dependencies
 1. Install the following packages globally:
@@ -37,7 +38,7 @@ Test server is [ExpressJS](https://expressjs.com/) web server serving pages with
 
 #### Server
 The following steps shall be done to run test server:
-1. Create configuration file `config.json` in `server` directory (see `server/config.json.template` for details)
+1. Create configuration file `config.json` in [server](server) directory (see [server/config.json.template](server/config.json.template) for details)
 2. Start test server: 
 ```
 npm start
@@ -68,8 +69,13 @@ This section describes how to develop new tests.
     * Put `<route_id>.kml` (input KML file) in resources directory
     * Put `<route_id>_route_params.json` (route parameters response JSON) in resources directory
 
-2. Create new test in `test/tests` directory
+2. Create new test in [test/tests](test/tests) directory
     * For the **automated verification** testing - add new test-case in `verification.js` test file. All the available assertion commands are defined in  [page.js](test/pages/page.js) file
     * For the **error handling** - add new test-case in `errors.js` test file 
 
-3. Run new test (see [Execution](#Execution) section)
+3. Run new test locally (see [Execution](#execution) section) or using CircleCI (see [Continuous Integration](#continuous-integration) section)
+
+### Continuous Integration
+[CircleCI](https://circleci.com/gh/qooban/edk-route-verifier) web application is used as for CI management. See [.circleci/config.yml](.circleci/config.yml) file for details of the build and test job configuration.
+
+You can create your own branch, push it remote and CI will start automatically. That way you can test your code even if you don't have local environment configured (NodeJS, Google Maps API Key, etc.).
