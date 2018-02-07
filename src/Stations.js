@@ -6,6 +6,11 @@ var turf = {
     helpers: require('@turf/helpers')
 };
 
+var CONSTS = {
+    FIRST_STATION_NUMBER: 1,
+    LAST_STATION_NUMBER: 14
+}
+
 module.exports = function (points, lineString) {
     this._sortPoints = function() {
         var path = this.path;
@@ -26,7 +31,7 @@ module.exports = function (points, lineString) {
             var START_NAMES_REGEX = /^(wstęp|wprowadzenie|początek|start)$/ig;
             var END_NAMES_REGEX = /^(zakończenia|koniec|podsumowanie)$/ig;
             var ROMAN_NUMBERS_REGEX = /^(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV)$/g;
-            var EUROPEAN_NUMBERS_REGEX = /^(1[0-4]|[1-9])$/g;
+            var EUROPEAN_NUMBERS_REGEX = /^\d+$/g;
             var SPLITTER_REGEX = /[ ,\._\-:;]+/;
             var ROMAN_EUROPEAN_MAP = {
                 'I': 1, 'II': 2, 'III': 3, 'IV': 4, 'V': 5, 'VI': 6, 'VII': 7,
@@ -56,21 +61,26 @@ module.exports = function (points, lineString) {
                 // try european numbers
                 var matches = part.match(EUROPEAN_NUMBERS_REGEX);
                 if (!_.isNull(matches)) {
-                    index = parseInt(matches[0]);
-                    return false;
+                    var stationNumber = parseInt(matches[0]);
+                    if (stationNumber >= CONSTS.FIRST_STATION_NUMBER && stationNumber <= CONSTS.LAST_STATION_NUMBER) {
+                        index = stationNumber;
+                        return false;
+                    } else {
+                        return true;
+                    }
                 }
 
                 // try start names
                 var matches = part.match(START_NAMES_REGEX);
                 if (!_.isNull(matches)) {
-                    index = 0;
+                    index = CONSTS.FIRST_STATION_NUMBER - 1; // 0
                     return false;
                 }
 
                 // try end names
                 var matches = part.match(END_NAMES_REGEX);
                 if (!_.isNull(matches)) {
-                    index = 15;
+                    index = CONSTS.LAST_STATION_NUMBER + 1; // 15
                     return false;
                 }
             });
@@ -123,7 +133,7 @@ module.exports = function (points, lineString) {
 
     this.getCount = function () {
         var numberOfStations = 0;
-        for (var stationNumber = 1; stationNumber <= 14; stationNumber++) {
+        for (var stationNumber = CONSTS.FIRST_STATION_NUMBER; stationNumber <= CONSTS.LAST_STATION_NUMBER; stationNumber++) {
             var firstStationName = '';
             var stationsOfNumber = _.filter(this.points, function (station) {
                 if (station.properties.index === stationNumber) {
@@ -155,12 +165,12 @@ module.exports = function (points, lineString) {
                 logger.debug('Not checking order for unrecognized point: ' + this.points[i-1].properties.name);
             } else if (this.pathCircular &&
                        (
-                        (previousStationNumber === 1 && currentStationNumber === 14) ||
-                        (currentStationNumber === 1 && previousStationNumber === 14)
+                        (previousStationNumber === CONSTS.FIRST_STATION_NUMBER && currentStationNumber === CONSTS.LAST_STATION_NUMBER) ||
+                        (currentStationNumber === CONSTS.FIRST_STATION_NUMBER && previousStationNumber === CONSTS.LAST_STATION_NUMBER)
                        )
                       )
             {
-                logger.debug('Not checking order for station 1 and 14 when route is circular.');
+                logger.debug('Not checking order for station', CONSTS.FIRST_STATION_NUMBER, 'and', CONSTS.LAST_STATION_NUMBER, 'when route is circular.');
             } else if (currentStationNumber <= previousStationNumber) {
                 logger.warn('Detected invalid order of stations. Station ' + currentStationNumber + ' is after station ' + previousStationNumber + '.');
                 result = false;

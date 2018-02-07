@@ -36,6 +36,22 @@ module.exports = {
             .assertDataConsistency(true);
     },
 
+    'Positive test - zero-leading station numbers': function (client) {
+        client.page.page()
+            .navigate('3-zero_leading')
+            .verifyRoute()
+            .assertSinglePath(true)
+            .assertPathLength(80, 1)
+            .assertRouteType('Trasa EDK')
+            .assertNumberOfStations(true)
+            .assertStationsOrder(true)
+            .assertStationsOnPath(false)
+            .assertElevationGain(1600, 20)
+            .assertElevationLoss(1360, 20)
+            .assertElevationTotalChange(2970, 20)
+            .assertDataConsistency(true);
+    },
+
     'Positive test - long path': function (client) {
     },
 
