@@ -76,7 +76,7 @@ function getPathElevations(lineString, useLocalElevations) {
         // Optimize path array length
         // This is done to send no more than MAXIMUM_NUMBER_OF_LATLNG_OBJECTS coordinates in KML path
         var MAXIMUM_NUMBER_OF_SAMPLES = 512;
-        var MAXIMUM_NUMBER_OF_LATLNG_OBJECTS = 2048;
+        var MAXIMUM_NUMBER_OF_LATLNG_OBJECTS = 1024; // Request to google.maps.ElevationService cannot be too long (2048 is too long)
         logger.debug('Number of LatLng objects:', path.length);
         if (path.length > MAXIMUM_NUMBER_OF_LATLNG_OBJECTS) {
             var optimizedPath = [];
