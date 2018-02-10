@@ -80,12 +80,6 @@
 		</LineString>
 	</Placemark>
 	<Placemark>
-		<name>Start</name>
-		<Point>
-			<coordinates>20.4405825,49.9682399,0</coordinates>
-		</Point>
-	</Placemark>
-	<Placemark>
 		<name>Stacja 14</name>
 		<styleUrl>#icon-1315-nodesc</styleUrl>
 		<Point>

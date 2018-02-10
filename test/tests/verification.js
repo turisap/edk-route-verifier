@@ -115,8 +115,8 @@ module.exports = {
             .assertNumberOfStations(true)
             .assertStationsOrder(false)
             .assertStationsOnPath(true)
-            .assertElevationGain(880, 20)
-            .assertElevationLoss(920, 20)
+            .assertElevationGain(920, 20)
+            .assertElevationLoss(880, 20)
             .assertElevationTotalChange(1800, 40)
             .assertDataConsistency(true);
     },
