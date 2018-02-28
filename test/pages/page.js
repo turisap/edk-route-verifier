@@ -25,6 +25,14 @@ module.exports = {
 
                 return this;
             },
+            closePageReloadModal: function() {
+                this.waitForElementVisible('@pageReloadModal')
+                    .waitForElementVisible('@pageReloadModalCloseIcon')
+                    .click('@pageReloadModalCloseIcon')
+                    .waitForElementNotVisible('@pageReloadModal');
+
+                return this;
+            },
             assertSinglePath: function(isSingle) {
                 this.log('Single path verification. Expecting path:', isSingle ? 'single' : 'not single');
                 return isSingle
@@ -110,6 +118,9 @@ module.exports = {
     elements: {
         verifyRouteButton: 'button#verifyRoute',
         verifyRouteButtonLoader: 'button#verifyRoute div#loader',
+
+        pageReloadModal: 'div#pageReloadModal',
+        pageReloadModalCloseIcon: 'div#pageReloadModal button.close',
 
         singlePathBox: 'div#singlePath',
         singlePathIcon: 'div#singlePath span.info-box-icon',
