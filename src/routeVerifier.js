@@ -89,6 +89,14 @@ function verifyRoute() {
                                 helpers.approveRoute(context.routeApproveUrl)
                                     .then(function() {
                                         logger.info('Route approved.');
+                                        var reloadTimeout = setTimeout(function(){
+                                            window.location.reload(1);
+                                        }, 5000);
+                                        $('div#pageReloadModal').on('hide.bs.modal', function (e) {
+                                            clearTimeout(reloadTimeout);
+                                        });
+                                        $('div#pageReloadModal').modal();
+
                                     })
                                     .catch(function(error) {
                                         logger.error('Route approval error.', error);
