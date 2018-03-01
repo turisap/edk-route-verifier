@@ -124,6 +124,102 @@ module.exports = {
             .assertDataConsistency(true);
     },
 
+	 'Negative test - 20-duplicated path': function (client) {
+        client.page.page()
+            .navigate('20-duplicated_path')
+            .verifyRoute()
+            .assertSinglePath(false)
+            .assertPathLength(52, 1)
+            .assertRouteType('Trasa EDK')
+            .assertNumberOfStations(true)
+            .assertStationsOrder(true)
+            .assertStationsOnPath(true)
+            .assertElevationGain(304, 20)
+            .assertElevationLoss(342, 20)
+            .assertElevationTotalChange(646, 40)
+            .assertDataConsistency(true);
+    },
+	
+	 'Negative test - 21-two path': function (client) {
+        client.page.page()
+            .navigate('21-two_path')
+            .verifyRoute()
+            .assertSinglePath(false)
+            .assertPathLength(24, 1)
+            .assertRouteType('Droga na wzór EDK')
+            .assertNumberOfStations(true)
+            .assertStationsOrder(false)
+            .assertStationsOnPath(false)
+            .assertElevationGain(157, 20)
+            .assertElevationLoss(163, 20)
+            .assertElevationTotalChange(320, 40)
+            .assertDataConsistency(false);
+    },
+
+	 'Negative test - 22-15_stations': function (client) {
+        client.page.page()
+            .navigate('22-15_stations')
+            .verifyRoute()
+            .assertSinglePath(true)
+            .assertPathLength(40, 1)
+            .assertRouteType('Trasa EDK')
+            .assertNumberOfStations(true)
+            .assertStationsOrder(true)
+            .assertStationsOnPath(true)
+            .assertElevationGain(313, 20)
+            .assertElevationLoss(314, 20)
+            .assertElevationTotalChange(627, 40)
+            .assertDataConsistency(true);
+    },
+	 'Negative test - 23-13_stations': function (client) {
+        client.page.page()
+            .navigate('23-13_stations')
+            .verifyRoute()
+            .assertSinglePath(true)
+            .assertPathLength(40, 1)
+            .assertRouteType('Trasa EDK')
+            .assertNumberOfStations(false)
+            .assertStationsOrder(true)
+            .assertStationsOnPath(true)
+            .assertElevationGain(313, 20)
+            .assertElevationLoss(314, 20)
+            .assertElevationTotalChange(627, 40)
+            .assertDataConsistency(true);
+    },
+
+	 'Positive test - 24-Short_distance_between_1_14': function (client) {
+        client.page.page()
+            .navigate('24-Short_distance_between_1_14')
+            .verifyRoute()
+            .assertSinglePath(true)
+            .assertPathLength(40, 1)
+            .assertRouteType('Trasa EDK')
+            .assertNumberOfStations(true)
+            .assertStationsOrder(true)
+            .assertStationsOnPath(true)
+            .assertElevationGain(327, 20)
+            .assertElevationLoss(328, 20)
+            .assertElevationTotalChange(650, 40)
+            .assertDataConsistency(true);
+    },
+	
+	 'Positive test - 25-eight_shaped_route': function (client) {
+        client.page.page()
+            .navigate('25-eight_shaped_route')
+            .verifyRoute()
+            .assertSinglePath(true)
+            .assertPathLength(52, 1)
+            .assertRouteType('Trasa EDK')
+            .assertNumberOfStations(true)
+            .assertStationsOrder(true)
+            .assertStationsOnPath(true)
+            .assertElevationGain(285, 20)
+            .assertElevationLoss(285, 20)
+            .assertElevationTotalChange(570, 40)
+            .assertDataConsistency(true);
+    },
+	
+	
     after: function(client) {
         client.end();
     }
