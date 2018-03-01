@@ -47,7 +47,7 @@ jobs:
 
       - run:
           name: Create application bundle file
-          command: npm run bundle
+          command: npm run bundle:test
 
       - run:
           name: Start test server
