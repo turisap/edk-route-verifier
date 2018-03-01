@@ -1,22 +1,23 @@
 {
   "name": "edk-route-verifier",
-  "version": "0.3.1",
+  "version": "1.0.0",
   "description": "Extreme Way of the Cross project route verifier",
   "main": "edk-route-verifier.js",
   "scripts": {
-    "bundle:test": "browserify src/routeVerifier.js > server/static/js/edk-route-verifier.js && uglifyjs server/static/js/edk-route-verifier.js > server/static/js/edk-route-verifier.min.js",
-    "bundle:dist": "browserify src/routeVerifier.js > dist/edk-route-verifier.js && uglifyjs dist/edk-route-verifier.js > dist/edk-route-verifier.min.js",
-    "start": "npm run bundle && cd server && npm run start",
+    "bundle:test": "cross-var browserify src/routeVerifier.js -o server/static/js/\"$npm_package_name\".js && cross-var uglifyjs server/static/js/\"$npm_package_name\".js -o server/static/js/\"$npm_package_name\".min.js",
+    "bundle:dist": "mkdir dist && cross-var browserify src/routeVerifier.js -o dist/\"$npm_package_name\".js && cross-var uglifyjs dist/\"$npm_package_name\".js -o dist/\"$npm_package_name\".min.js",
+    "start": "npm run bundle:test && cd server && npm run start",
     "test": "nightwatch -c test/nightwatch.conf.js",
     "version:patch": "npm version patch",
-    "git:branch": "cross-var git branch post-$npm_package_version && cross-var git checkout post-$npm_package_version",
-    "git:commit": "git add dist/* && git commit --amend -m \"Added artifacts for new version\"",
-    "git:push": "git push --tags origin HEAD:master",
-    "clean": "rm -Rf dist/",
-    "deploy": "npm run git:branch && npm run version:patch && npm run bundle:dist && npm run git:commit && npm run git:push && npm run clean"
+    "git:branch": "cross-var git branch $npm_package_version && cross-var git checkout $npm_package_version",
+    "git:commit": "git add dist/* && git commit -m \"Added artifacts for new version\"",
+    "git:push": "cross-var git push --tags origin HEAD:$npm_package_version",
+    "deploy:clean": "git checkout master && cross-var git branch -D $npm_package_version",
+    "deploy:current": "npm run bundle:test && npm test && npm run git:branch && npm run bundle:dist && npm run git:commit && cross-var git tag v$npm_package_version && npm run git:push",
+    "deploy:next": "npm run bundle:test && npm test && npm run git:branch && npm run bundle:dist && npm run git:commit && npm run version:patch && npm run git:push"
   },
-  "author": "Jakub Niezgoda",
-  "license": "ISC",
+  "author": "Jakub Niezgoda (qooban)",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/qooban/edk-route-verifier.git"

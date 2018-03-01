@@ -62,7 +62,8 @@ app.get('/:routeId', function(req, res) {
     res.render('pages/index', {
         googleMapsApiKey: configuration.googleMapsApiKey,
         routeId: id,
-        serverPort: port
+        serverPort: port,
+        jsFilename: 'edk-route-verifier.js'
     });
 });
 
