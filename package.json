@@ -6,7 +6,7 @@
   "scripts": {
     "bundle:test": "cross-var browserify src/routeVerifier.js -o server/static/js/\"$npm_package_name\".js && cross-var uglifyjs server/static/js/\"$npm_package_name\".js -o server/static/js/\"$npm_package_name\".min.js",
     "bundle:dist": "mkdir dist && cross-var browserify src/routeVerifier.js -o dist/\"$npm_package_name\".js && cross-var uglifyjs dist/\"$npm_package_name\".js -o dist/\"$npm_package_name\".min.js",
-    "start": "npm run bundle:test && cd server && npm run start",
+    "start": "cd server && npm run start",
     "test": "nightwatch -c test/nightwatch.conf.js",
     "version:patch": "npm version patch",
     "git:branch": "cross-var git branch $npm_package_version && cross-var git checkout $npm_package_version",
