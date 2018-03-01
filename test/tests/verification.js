@@ -8,6 +8,7 @@ module.exports = {
         client.page.page()
             .navigate(1)
             .verifyRoute()
+            .closePageReloadModal()
             .assertSinglePath(true)
             .assertPathLength(52, 1)
             .assertRouteType('Trasa EDK')
@@ -24,6 +25,7 @@ module.exports = {
         client.page.page()
             .navigate('2-circular')
             .verifyRoute()
+            .closePageReloadModal()
             .assertSinglePath(true)
             .assertPathLength(37, 1)
             .assertRouteType('Trasa EDK')
@@ -93,6 +95,7 @@ module.exports = {
         client.page.page()
             .navigate('12-circular_path')
             .verifyRoute()
+            .closePageReloadModal()
             .assertSinglePath(true)
             .assertPathLength(37, 1)
             .assertRouteType('Trasa EDK')
@@ -153,7 +156,7 @@ module.exports = {
             .assertDataConsistency(false);
     },
 
-	 'Negative test - 22-15_stations': function (client) {
+	 'Negative test - 22-15_stations': function (client) { // Currently it is positive, unrecognized points are not counted as stations
         client.page.page()
             .navigate('22-15_stations')
             .verifyRoute()
@@ -188,6 +191,7 @@ module.exports = {
         client.page.page()
             .navigate('24-Short_distance_between_1_14')
             .verifyRoute()
+            .closePageReloadModal()
             .assertSinglePath(true)
             .assertPathLength(40, 1)
             .assertRouteType('Trasa EDK')
@@ -204,6 +208,7 @@ module.exports = {
         client.page.page()
             .navigate('25-eight_shaped_route')
             .verifyRoute()
+            .closePageReloadModal()
             .assertSinglePath(true)
             .assertPathLength(52, 1)
             .assertRouteType('Trasa EDK')
