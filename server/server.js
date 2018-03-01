@@ -43,6 +43,19 @@ if (configuration === null) {
 app.set('view engine', 'ejs');
 app.use('/static', express.static(__dirname + '/static'));
 
+// all resources page
+app.get('/resources', function(req, res) {
+    var resources = []; 
+    fs.readdirSync(path.resolve(configuration.resourcesPath)).forEach(file => {
+        if (file.search(/\.kml$/i) >= 0) {
+            resources.push(file.replace(".kml", ""));
+        }
+    });
+    res.render('pages/resources', {
+        resources
+    });
+});
+
 // index page
 app.get('/:routeId', function(req, res) {
     var id = req.params.routeId;

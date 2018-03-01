@@ -5,8 +5,9 @@
 ### Setup
 #### Prerequisities
 * [Git](https://git-scm.com)
-* [NodeJS](https://nodejs.org)  >= v8.x
-* [Google Maps API Key](https://developers.google.com/maps/documentation/javascript/get-api-key)
+* [NodeJS](https://nodejs.org) >= v8.x
+* [Google Maps API Key](https://developers.google.com/maps/documentation/javascript/get-api-key) (necessary only for testing, you need to enable access to the following APIs: Google Maps Elevation API, Google Maps Embed API, Google Maps JavaScript API)
+* [Google Chrome](https://www.google.com/chrome/) (necessary only for testing)
 
 #### Dependencies
 1. Install the following packages globally:
@@ -78,4 +79,4 @@ This section describes how to develop new tests.
 ### Continuous Integration
 [CircleCI](https://circleci.com/gh/qooban/edk-route-verifier) web application is used as for CI management. See [.circleci/config.yml](.circleci/config.yml) file for details of the build and test job configuration.
 
-You can create your own branch, push it remote and CI will start automatically. That way you can test your code even if you don't have local environment configured (NodeJS, Google Maps API Key, etc.).
+You can create your own branch, push it remote and CI will start automatically. That way you can test your code even if you don't have local environment configured (NodeJS, Google Chrome, Google Maps API Key, etc.).
