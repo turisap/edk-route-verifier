@@ -1,6 +1,13 @@
 # edk-route-verifier
 [![CircleCI](https://circleci.com/gh/cloudify-cosmo/cloudify-stage.svg?style=svg)](https://circleci.com/gh/qooban/edk-route-verifier)
 
+### Usage
+
+`edk-route-verifier` is deployed using [GitHub Releases](https://github.com/qooban/edk-route-verifier/releases). Files for specific `version` can be found under: 
+`https://github.com/qooban/edk-route-verifier/tree/<version>/dist`, eg. [v1.0.1](https://github.com/qooban/edk-route-verifier/tree/1.0.1/dist). 
+
+You can use a service like [RawGit](https://rawgit.com/), [JsDelivr](https://www.jsdelivr.com/) or [GitCDN](https://gitcdn.xyz/) to produce link to specific version of `edk-route-verifier.js` or `edk-route-verifier.js.min`.
+
 
 ### Setup
 #### Prerequisities
@@ -25,11 +32,11 @@ cd server && npm install
 ```
 
 ### Bundle
-To create output Javascript bundle file - `routeVerifier.js` you need to issue:
+To create output Javascript bundle file - `edk-route-verifier.js` you need to issue:
 ```
-npm run bundle
+npm run bundle:test
 ```
-That command takes all code from `src` directory and with use of [browserify](http://browserify.org/) and [uglify-js](http://lisperator.net/uglifyjs/) libraries creates `routeVerifier.js` and `routeVerifier.js.min` in `server/static/js` directory.
+That command takes all code from `src` directory and with use of [browserify](http://browserify.org/) and [uglify-js](http://lisperator.net/uglifyjs/) libraries creates `edk-route-verifier.js` and `edk-route-verifier.js.min` in `server/static/js` directory.
 
 ### Test 
 
@@ -80,3 +87,12 @@ This section describes how to develop new tests.
 [CircleCI](https://circleci.com/gh/qooban/edk-route-verifier) web application is used as for CI management. See [.circleci/config.yml](.circleci/config.yml) file for details of the build and test job configuration.
 
 You can create your own branch, push it remote and CI will start automatically. That way you can test your code even if you don't have local environment configured (NodeJS, Google Chrome, Google Maps API Key, etc.).
+
+### Deployment
+
+`edk-route-verifier.js` and `edk-route-verifier.js.min` are deployed under tags on GitHub. Follow this step-by-step guide to deploy version:
+1. Change `version` in `package.json`
+2. Push all the changes to remote
+3. [Start test server](#server)
+4. Execute `npm run deploy:current`
+5. If exeuction was successful, then check [GitHub releases](https://github.com/qooban/edk-route-verifier/tags) and create release and update release notes
