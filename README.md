@@ -8,7 +8,6 @@
 
 You can use a service like [RawGit](https://rawgit.com/), [JsDelivr](https://www.jsdelivr.com/) or [GitCDN](https://gitcdn.xyz/) to produce link to specific version of `edk-route-verifier.js` or `edk-route-verifier.js.min`.
 
-
 ### Setup
 #### Prerequisities
 * [Git](https://git-scm.com)
