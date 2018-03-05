@@ -1,5 +1,6 @@
 # edk-route-verifier
 [![CircleCI](https://circleci.com/gh/cloudify-cosmo/cloudify-stage.svg?style=svg)](https://circleci.com/gh/edk-software/edk-route-verifier)
+[![](https://data.jsdelivr.com/v1/package/gh/edk-software/edk-route-verifier/badge)](https://www.jsdelivr.com/package/gh/edk-software/edk-route-verifier)
 
 ### Usage
 
