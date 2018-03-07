@@ -49,9 +49,7 @@ const removeControlChildren = function(element) {
 
 export default class Controls {
     // Constructor
-    constructor (geoJson) {
-        this.geoJson = geoJson;
-    }
+
 
     static updateRouteType (isNormalRoute) {
         const normalRouteString = $('input#normalRouteString').attr('value');
