@@ -10,3 +10,5 @@ node_modules/
 /test/screenshots/
 /test/reports/
 
+# Debug logs
+selenium-debug.log
