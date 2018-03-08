@@ -17,10 +17,16 @@ export default class Route {
         this.geoJson = geoJson;
         this.lineString = helpers.getLineString(this.geoJson);
         this.points = helpers.getPoints(this.geoJson);
+        this.isRouteVerifiable = true;
+        this.numberOfPaths = helpers.getNumberOfFeatures('LineString', this.geoJson);
+        this.stations = new Stations(this.points, this.lineString);
+        this.path = this.stations.isPathReversed() ? helpers.reverseLineString(this.lineString) : this.lineString;
+        this.pathElevation;
 
         /**
          * I'm not sure if this is the right way to implement these checks
-         * As I understand, the return statement in the last one will make no effect on further code
+         * As I understand, the return statement in the last one will make no effect on further code,
+         * While it should somehow stop execution of code with the constructor function implementation
          */
         if(_.isEmpty(this.lineString)) {
             logger.error('No line string in route.');
@@ -35,44 +41,40 @@ export default class Route {
         }
     }
 
-    isRouteVerifiable = true;
-    numberOfPaths = helpers.getNumberOfFeatures('LineString', this.geoJson);
-    stations = new Stations(points, lineString);
-    path = this.stations.isPathReversed() ? helpers.reverseLineString(lineString) : lineString;
 
     static isVerifiable () {
         return this.isRouteVerifiable;
     }
 
     static isSinglePath () {
-        var result = _.isEqual(this.numberOfPaths, EXPECTED_NUMBER_OF_PATHS);
+        const result = _.isEqual(this.numberOfPaths, EXPECTED_NUMBER_OF_PATHS);
         logger.debug('isSinglePath:', result, ', numberOfPaths:', this.numberOfPaths);
         return result;
     }
 
     static areAllStationsPresent () {
-        var numberOfStations = this.stations.getCount();
-        var result = _.isEqual(numberOfStations, EXPECTED_NUMBER_OF_STATIONS);
+        const numberOfStations = this.stations.getCount();
+        const result = _.isEqual(numberOfStations, EXPECTED_NUMBER_OF_STATIONS);
         logger.debug('areAllStationsPresent:', result,', numberOfStations:', numberOfStations);
         return result;
     }
 
     static areStationsOnThePath () {
-        var result = this.stations.areAllOnThePath(MAXIMUM_DISTANCE_FROM_STATION_TO_PATH);
+        const result = this.stations.areAllOnThePath(MAXIMUM_DISTANCE_FROM_STATION_TO_PATH);
         logger.debug('areStationsOnThePath:', result);
         return result;
     }
 
-    static isStationOrderCorrect = function() {
-        var result = this.stations.isOrderCorrect();
+    static isStationOrderCorrect () {
+        const result = this.stations.isOrderCorrect();
         logger.debug('isStationOrderCorrect:', result);
         return result;
     }
 
     static getPathLength () {
-        var result = 0;
+        let result = 0;
 
-        var googleMapsPath = helpers.getGoogleMapsPath(this.path);
+        const googleMapsPath = helpers.getGoogleMapsPath(this.path);
         result = google.maps.geometry.spherical.computeLength(googleMapsPath);
         result = result / 1000;
 
@@ -81,18 +83,21 @@ export default class Route {
     }
 
     static fetchPathElevationData () {
-        var _this = this;
         return helpers.getPathElevations(this.path)
-            .then(function(elevations) {
+            .then(elevations => {
                 logger.debug('Path elevations:', elevations);
-                _this.pathElevation = new PathElevation(elevations);
-                return _this.pathElevation;
+                this.pathElevation = new PathElevation(elevations);
+                return this.pathElevation;
             })
-            .catch(function(error) {
+            .catch(error => {
                 throw new Error(error);
             });
     }
 
+    /**
+     * This might be done as a getter, check after
+     * @returns {PathElevation|*}
+     */
     static getPathElevation () {
         logger.debug('getPathElevation:', this.pathElevation);
         return this.pathElevation;
