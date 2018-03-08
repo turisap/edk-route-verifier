@@ -165,7 +165,7 @@ export default class Controls {
         $(VERIFY_BUTTON_ID + ' ' + LOADER_ID).remove();
     }
 
-    static resetAll = function(value) {
+    static resetAll (value) {
         const text = '';
         const isValid = value === undefined ? null : value;
 

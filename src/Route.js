@@ -94,10 +94,7 @@ export default class Route {
             });
     }
 
-    /**
-     * This might be done as a getter, check after
-     * @returns {PathElevation|*}
-     */
+
     static getPathElevation () {
         logger.debug('getPathElevation:', this.pathElevation);
         return this.pathElevation;
