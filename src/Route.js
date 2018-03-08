@@ -2,7 +2,7 @@ import logger from 'loglevel';
 import * as _ from './lodash';
 import helpers from './helpers';
 import PathElevation from './PathElevation';
-var Stations = require('./Stations');
+import Stations from './Stations';
 
 // Constants
 const EXPECTED_NUMBER_OF_PATHS = 1;
