@@ -13,9 +13,26 @@ const MAXIMUM_DISTANCE_FROM_STATION_TO_PATH = 100; // meters
 export default class Route {
 
     constructor (geoJson) {
+
         this.geoJson = geoJson;
         this.lineString = helpers.getLineString(this.geoJson);
         this.points = helpers.getPoints(this.geoJson);
+
+        /**
+         * I'm not sure if this is the right way to implement these checks
+         * As I understand, the return statement in the last one will make no effect on further code
+         */
+        if(_.isEmpty(this.lineString)) {
+            logger.error('No line string in route.');
+            this.isRouteVerifiable = false;
+        }
+        if(_.isEmpty(this.points)) {
+            logger.error('No points in route.');
+            this.isRouteVerifiable = false;
+        }
+        if(!this.isRouteVerifiable) {
+            return;
+        }
     }
 
     isRouteVerifiable = true;
@@ -83,24 +100,3 @@ export default class Route {
 }
 
 
-
-module.exports = function (geoJson) {
-
-
-    // Constructor
-
-
-
-    if(_.isEmpty(lineString)) {
-        logger.error('No line string in route.')
-        this.isRouteVerifiable = false;
-    }
-    if(_.isEmpty(points)) {
-        logger.error('No points in route.')
-        this.isRouteVerifiable = false;
-    }
-    if(!this.isRouteVerifiable) {
-        return;
-    }
-
-}
