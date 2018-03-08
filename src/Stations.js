@@ -73,14 +73,14 @@ export default class Stations {
 
             _.forEach(parts, function (part) {
                 // try roman numbers
-                const matches = part.match(ROMAN_NUMBERS_REGEX); // it isn't clear why there are for matches declaration
+                let matches = part.match(ROMAN_NUMBERS_REGEX); // it isn't clear why there are for matches declaration
                 if (!_.isNull(matches)) {
                     index = ROMAN_EUROPEAN_MAP[matches[0]];
                     return false;
                 }
 
                 // try european numbers
-                const matches = part.match(EUROPEAN_NUMBERS_REGEX);
+                matches = part.match(EUROPEAN_NUMBERS_REGEX);
                 if (!_.isNull(matches)) {
                     const stationNumber = parseInt(matches[0]);
                     if (stationNumber >= CONSTS.FIRST_STATION_INDEX && stationNumber <= CONSTS.LAST_STATION_INDEX) {
@@ -92,14 +92,14 @@ export default class Stations {
                 }
 
                 // try start names
-                const matches = part.match(START_NAMES_REGEX);
+                matches = part.match(START_NAMES_REGEX);
                 if (!_.isNull(matches)) {
                     index = CONSTS.START_INDEX;
                     return false;
                 }
 
                 // try end names
-                const matches = part.match(END_NAMES_REGEX);
+                matches = part.match(END_NAMES_REGEX);
                 if (!_.isNull(matches)) {
                     index = CONSTS.END_INDEX;
                     return false;
