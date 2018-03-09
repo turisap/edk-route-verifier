@@ -15,9 +15,8 @@
     "deploy:clean": "git checkout master && cross-var git branch -D $npm_package_version",
     "deploy:current": "npm run bundle:test && npm test && npm run git:branch && npm run bundle:dist && npm run git:commit && cross-var git tag v$npm_package_version && npm run git:push",
     "deploy:next": "npm run bundle:test && npm test && npm run git:branch && npm run bundle:dist && npm run git:commit && npm run version:patch && npm run git:push",
-    "webpack:dev": "webpack --config webpack.config.js --mode development",
-    "webpack:prod": "webpack --config webpack.config.js --mode production",
-    "dev-server": "webpack-dev-server"
+    "build:dev": "webpack --config webpack.config.js --mode development",
+    "build:prod": "webpack --config webpack.config.js --mode production"
   },
   "author": "Jakub Niezgoda (qooban)",
   "license": "MIT",
@@ -43,14 +42,11 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-minify": "^0.3.0",
     "brfs": "^1.4.3",
-    "browserify": "^15.2.0",
     "chrome-driver-standalone": "^2.33.0",
     "cross-var": "^1.1.0",
     "nightwatch": "^0.9.19",
     "selenium-server-standalone-jar": "^3.8.1",
-    "uglify-js": "^3.3.9",
     "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.10",
-    "webpack-dev-server": "^3.1.0"
+    "webpack-cli": "^2.0.10"
   }
 }

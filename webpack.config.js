@@ -3,25 +3,29 @@
  */
 const path = require('path');
 
-module.exports = {
-    entry: './src/routeVerifier.js',
-    output: {
-        path: path.resolve(__dirname, 'server/static/js'),
-        filename: 'edk-route-verifier.js'
-    },
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /(node_modules|tests)/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
+module.exports = (env, args) => {
+    const inDevelopment = (args.mode === 'development');
+
+    return {
+        entry: './src/routeVerifier.js',
+        output: {
+            path: path.resolve(__dirname, 'server/static/js'),
+            filename: 'edk-route-verifier.js'
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.js$/,
+                    exclude: /(node_modules|tests)/,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['@babel/preset-env']
+                        }
                     }
                 }
-            }
-        ]
-    },
-    devtool: 'source-map'
-};
+            ]
+        },
+        devtool:  inDevelopment ? 'eval-source-map' : 'source-map'
+    }
+}
