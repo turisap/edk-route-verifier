@@ -1,13 +1,13 @@
 # edk-route-verifier
-[![CircleCI](https://circleci.com/gh/cloudify-cosmo/cloudify-stage.svg?style=svg)](https://circleci.com/gh/qooban/edk-route-verifier)
+[![CircleCI](https://circleci.com/gh/cloudify-cosmo/cloudify-stage.svg?style=svg)](https://circleci.com/gh/edk-software/edk-route-verifier)
+[![](https://data.jsdelivr.com/v1/package/gh/edk-software/edk-route-verifier/badge)](https://www.jsdelivr.com/package/gh/edk-software/edk-route-verifier)
 
 ### Usage
 
-`edk-route-verifier` is deployed using [GitHub Releases](https://github.com/qooban/edk-route-verifier/releases). Files for specific `version` can be found under: 
-`https://github.com/qooban/edk-route-verifier/tree/<version>/dist`, eg. [v1.0.1](https://github.com/qooban/edk-route-verifier/tree/1.0.1/dist). 
+`edk-route-verifier` is deployed using [GitHub Releases](https://github.com/edk-software/edk-route-verifier/releases). Files for specific `version` can be found under: 
+`https://github.com/edk-software/edk-route-verifier/tree/<version>/dist`, eg. [v1.0.1](https://github.com/edk-software/edk-route-verifier/tree/1.0.1/dist). 
 
 You can use a service like [RawGit](https://rawgit.com/), [JsDelivr](https://www.jsdelivr.com/) or [GitCDN](https://gitcdn.xyz/) to produce link to specific version of `edk-route-verifier.js` or `edk-route-verifier.js.min`.
-
 
 ### Setup
 #### Prerequisities
@@ -84,7 +84,7 @@ This section describes how to develop new tests.
 3. Run new test locally (see [Execution](#execution) section) or using CircleCI (see [Continuous Integration](#continuous-integration) section)
 
 ### Continuous Integration
-[CircleCI](https://circleci.com/gh/qooban/edk-route-verifier) web application is used as for CI management. See [.circleci/config.yml](.circleci/config.yml) file for details of the build and test job configuration.
+[CircleCI](https://circleci.com/gh/edk-software/edk-route-verifier) web application is used as for CI management. See [.circleci/config.yml](.circleci/config.yml) file for details of the build and test job configuration.
 
 You can create your own branch, push it remote and CI will start automatically. That way you can test your code even if you don't have local environment configured (NodeJS, Google Chrome, Google Maps API Key, etc.).
 
@@ -95,4 +95,4 @@ You can create your own branch, push it remote and CI will start automatically. 
 2. Push all the changes to remote
 3. [Start test server](#server)
 4. Execute `npm run deploy:current`
-5. If exeuction was successful, then check [GitHub releases](https://github.com/qooban/edk-route-verifier/tags) and create release and update release notes
+5. If exeuction was successful, then check [GitHub releases](https://github.com/edk-software/edk-route-verifier/tags) and create release and update release notes

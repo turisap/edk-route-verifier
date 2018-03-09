@@ -23,7 +23,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/qooban/edk-route-verifier.git"
+    "url": "https://github.com/edk-software/edk-route-verifier.git"
   },
   "dependencies": {
     "@babel/core": "^7.0.0-beta.40",
