@@ -7,7 +7,7 @@ module.exports = {
     entry: './src/routeVerifier.js',
     output: {
         path: path.resolve(__dirname, 'server/static/js'),
-        filename: 'edk-route-verifier.min.js'
+        filename: 'edk-route-verifier.js'
     },
     module: {
         rules: [
@@ -23,7 +23,5 @@ module.exports = {
             }
         ]
     },
-    plugins: [
-
-    ]
+    devtool: 'source-map'
 };

@@ -42,36 +42,36 @@ export default class Route {
     }
 
 
-    static isVerifiable () {
+    isVerifiable () {
         return this.isRouteVerifiable;
     }
 
-    static isSinglePath () {
+    isSinglePath () {
         const result = _.isEqual(this.numberOfPaths, EXPECTED_NUMBER_OF_PATHS);
         logger.debug('isSinglePath:', result, ', numberOfPaths:', this.numberOfPaths);
         return result;
     }
 
-    static areAllStationsPresent () {
+    areAllStationsPresent () {
         const numberOfStations = this.stations.getCount();
         const result = _.isEqual(numberOfStations, EXPECTED_NUMBER_OF_STATIONS);
         logger.debug('areAllStationsPresent:', result,', numberOfStations:', numberOfStations);
         return result;
     }
 
-    static areStationsOnThePath () {
+    areStationsOnThePath () {
         const result = this.stations.areAllOnThePath(MAXIMUM_DISTANCE_FROM_STATION_TO_PATH);
         logger.debug('areStationsOnThePath:', result);
         return result;
     }
 
-    static isStationOrderCorrect () {
+    isStationOrderCorrect () {
         const result = this.stations.isOrderCorrect();
         logger.debug('isStationOrderCorrect:', result);
         return result;
     }
 
-    static getPathLength () {
+    getPathLength () {
         let result = 0;
 
         const googleMapsPath = helpers.getGoogleMapsPath(this.path);
@@ -82,7 +82,7 @@ export default class Route {
         return result;
     }
 
-    static fetchPathElevationData () {
+    fetchPathElevationData () {
         return helpers.getPathElevations(this.path)
             .then(elevations => {
                 logger.debug('Path elevations:', elevations);
@@ -95,7 +95,7 @@ export default class Route {
     }
 
 
-    static getPathElevation () {
+    getPathElevation () {
         logger.debug('getPathElevation:', this.pathElevation);
         return this.pathElevation;
     }

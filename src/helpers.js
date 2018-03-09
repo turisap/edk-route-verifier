@@ -74,7 +74,7 @@ export default class Helpers {
             })
         } else {
             // No elevation in line string
-            let path = getGoogleMapsPath(lineString);
+            let path = this.getGoogleMapsPath(lineString);
 
             // Optimize path array length
             // This is done to send no more than MAXIMUM_NUMBER_OF_LATLNG_OBJECTS coordinates in KML path

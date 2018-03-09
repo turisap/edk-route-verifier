@@ -51,53 +51,53 @@ export default class Controls {
     // Constructor
 
 
-    static updateRouteType (isNormalRoute) {
+    updateRouteType (isNormalRoute) {
         const normalRouteString = $('input#normalRouteString').attr('value');
         const inspiredRouteString = $('input#inspiredRouteString').attr('value');
         updateControlValue(ROUTE_TYPE_ID, isNormalRoute ? normalRouteString : inspiredRouteString);
     }
 
-    static updatePathLength (isLengthValid, length) {
+    updatePathLength (isLengthValid, length) {
         updateControlValue(PATH_LENGTH_ID, length.toFixed(2), 'km');
         updateControlColor(PATH_LENGTH_ID, isLengthValid);
     }
 
-    static updateElevationGain (isElevationGainValid, elevationGain) {
+    updateElevationGain (isElevationGainValid, elevationGain) {
         updateControlValue(ELEVATION_GAIN_ID, elevationGain.toFixed(2), 'm')
         updateControlColor(ELEVATION_GAIN_ID, isElevationGainValid);
     }
 
-    static updateElevationLoss (isElevationLossValid, elevationLoss) {
+    updateElevationLoss (isElevationLossValid, elevationLoss) {
         updateControlValue(ELEVATION_LOSS_ID, elevationLoss.toFixed(2), 'm')
         updateControlColor(ELEVATION_LOSS_ID, isElevationLossValid);
     }
 
-    static updateElevationTotalChange (isElevationTotalChangeValid, elevationTotalChange) {
+    updateElevationTotalChange (isElevationTotalChangeValid, elevationTotalChange) {
         updateControlValue(ELEVATION_TOTAL_CHANGE_ID, elevationTotalChange.toFixed(2), 'm');
         updateControlColor(ELEVATION_TOTAL_CHANGE_ID, isElevationTotalChangeValid);
     }
 
-    static updateNumberOfStations (areAllStationsPresent) {
+    updateNumberOfStations (areAllStationsPresent) {
         updateControlColor(NUMBER_OF_STATIONS_ID, areAllStationsPresent);
     }
 
-    static updateStationsOrder (isStationOrderCorrect) {
+    updateStationsOrder (isStationOrderCorrect) {
         updateControlColor(STATIONS_ORDER_ID, isStationOrderCorrect);
     }
 
-    static updateStationsOnPath (areAllStationsOnPath) {
+    updateStationsOnPath (areAllStationsOnPath) {
         updateControlColor(STATIONS_ON_PATH_ID, areAllStationsOnPath);
     }
 
-    static updateSinglePath (isSinglePath) {
+    updateSinglePath (isSinglePath) {
         updateControlColor(SINGLE_PATH_ID, isSinglePath);
     }
 
-    static updateDataConsistency (isDataConsistent) {
+    updateDataConsistency (isDataConsistent) {
         updateControlColor(DATA_CONSISTENCY_ID, isDataConsistent);
     }
 
-    static drawElevationChart (pathElevation) {
+     drawElevationChart (pathElevation) {
         const X_AXIS_NUMBER_OF_LABELS = 10;
         const X_AXIS_LABEL_STRING = '[km]';
         const Y_AXIS_LABEL_STRING = '[m]';
@@ -151,21 +151,21 @@ export default class Controls {
         });
     }
 
-    static resetElevationChart () {
+    resetElevationChart () {
         const elevationChartParentElement = $(ELEVATION_CHART_ID).parent();
         $(ELEVATION_CHART_ID).remove();
         elevationChartParentElement.append(ELEVATION_CHART_ELEMENT);
     }
 
-    static addLoaderToButton () {
+    addLoaderToButton () {
         $(VERIFY_BUTTON_ID).append(LOADER_ELEMENT);
     }
 
-    static removeLoaderFromButton () {
+    removeLoaderFromButton () {
         $(VERIFY_BUTTON_ID + ' ' + LOADER_ID).remove();
     }
 
-    static resetAll (value) {
+    resetAll (value) {
         const text = '';
         const isValid = value === undefined ? null : value;
 

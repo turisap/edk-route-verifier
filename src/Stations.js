@@ -1,9 +1,12 @@
 import logger from 'loglevel';
 import * as _ from './lodash';
+import pointOnLine from '@turf/point-on-line';
+import distance from '@turf/distance';
+import helpers from '@turf/helpers'
 const turf = {
-    pointOnLine: require('@turf/point-on-line'),
-    distance: require('@turf/distance'),
-    helpers: require('@turf/helpers')
+    pointOnLine,
+    distance,
+    helpers
 };
 
 const CONSTS = {
@@ -33,7 +36,7 @@ export default class Stations {
     }
 
 
-    static _sortPoints () {
+    _sortPoints () {
         const path = this.path;
         const enhancedPoints = _.map(this.points, point => {
             point.properties.nearestOnLine = turf.pointOnLine(path, point, 'meters');
@@ -47,7 +50,7 @@ export default class Stations {
         this.points = sortedPoints;
     }
 
-    static _addIndexes () {
+    _addIndexes () {
         const getIndex = str => {
             const START_NAMES_REGEX = /^(wstęp|wprowadzenie|początek|start)$/ig;
             const END_NAMES_REGEX = /^(zakończenie|koniec|podsumowanie)$/ig;
@@ -118,7 +121,7 @@ export default class Stations {
         });
     }
 
-    static _updateDirection () {
+    _updateDirection () {
         const pathReversed = false;
 
         const startPoint = _.filter(this.points, point => {
@@ -152,7 +155,7 @@ export default class Stations {
         }
     }
 
-    static _updateCircularity () {
+    _updateCircularity () {
         const MAXIMUM_DISTANCE_START_END_IN_CIRCULAR_PATH = 500; // meters
         const options = {units: 'kilometers'};
 
@@ -165,7 +168,7 @@ export default class Stations {
         }
     }
 
-    static getCount () {
+    getCount () {
         let numberOfStations = 0;
         for (let stationNumber = CONSTS.FIRST_STATION_INDEX; stationNumber <= CONSTS.LAST_STATION_INDEX; stationNumber++) {
             let firstStationName = '';
@@ -187,7 +190,7 @@ export default class Stations {
         return numberOfStations;
     }
 
-    static isOrderCorrect () {
+    isOrderCorrect () {
         let result = true;
         for(let i = 1; i < this.points.length; i++) {
             const currentStationNumber = this.points[i].properties.index;
@@ -215,7 +218,7 @@ export default class Stations {
         return result
     }
 
-    static areAllOnThePath (maximumDistanceFromPath) {
+    areAllOnThePath (maximumDistanceFromPath) {
         let result = true;
 
         _.forEach(this.points, (station, index) => {
@@ -235,7 +238,7 @@ export default class Stations {
         return result;
     }
 
-    static isPathReversed () {
+    isPathReversed () {
         return this.pathReversed;
     }
 
