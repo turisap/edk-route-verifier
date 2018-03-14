@@ -13,7 +13,6 @@ const MAXIMUM_DISTANCE_FROM_STATION_TO_PATH = 100; // meters
 export default class Route {
 
     constructor (geoJson) {
-
         this.geoJson = geoJson;
         this.lineString = helpers.getLineString(this.geoJson);
         this.points = helpers.getPoints(this.geoJson);

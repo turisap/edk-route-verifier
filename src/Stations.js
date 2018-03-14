@@ -246,6 +246,5 @@ export default class Stations {
     isPathReversed () {
         return this.pathReversed;
     }
-
 }
 

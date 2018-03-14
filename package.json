@@ -17,7 +17,7 @@
     "deploy:next": "npm run bundle:test && npm test && npm run git:branch && npm run bundle:dist && npm run git:commit && npm run version:patch && npm run git:push",
     "build:dev": "webpack --config webpack.config.js --mode development",
     "build:prod": "webpack --config webpack.config.js --mode production",
-    "check": "concurrently \"eslint src/**\" \"eslint server/**\" --cache --fix"
+    "check": "concurrently \"eslint src/**\" \"eslint server/**\" --cache --fix --max-warnings 10"
   },
   "author": "Jakub Niezgoda (qooban)",
   "license": "MIT",
