@@ -25,21 +25,20 @@
     "url": "https://github.com/edk-software/edk-route-verifier.git"
   },
   "dependencies": {
-    "@babel/core": "^7.0.0-beta.40",
-    "@babel/preset-env": "^7.0.0-beta.40",
     "@turf/distance": "^5.1.5",
     "@turf/flatten": "^5.1.5",
     "@turf/point-on-line": "^5.0.3",
-    "babel-loader": "^8.0.0-beta.0",
     "chart.js": "^2.7.1",
     "lodash": "^4.17.4",
     "loglevel": "^1.5.1",
     "togeojson": "^0.16.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-beta.40",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.40",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
+    "@babel/preset-env": "^7.0.0-beta.40",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.0-beta.0",
     "babel-preset-minify": "^0.3.0",
     "brfs": "^1.4.3",
     "chrome-driver-standalone": "^2.33.0",

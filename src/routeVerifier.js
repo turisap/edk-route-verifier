@@ -5,6 +5,12 @@ import Context from './Context';
 import Controls from './Controls';
 
 
+// Constants
+const NORMAL_ROUTE_MIN_LENGTH = 40; // kilometers
+const SHORT_NORMAL_ROUTE_MIN_LENGTH = 30; // kilometers
+const SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN = 500; // meters
+
+
 function verifyRoute() {
     const context = new Context();
     const controls = new Controls();
@@ -49,7 +55,8 @@ function verifyRoute() {
                     const isPathElevationGainValid = true;
                     controls.updateElevationGain(isPathElevationGainValid, pathElevation.gain);
 
-                    const isNormalRoute = routeLength >= 40 || pathElevation.gain > 500 && routeLength >= 30;
+                    const isNormalRoute = routeLength >= NORMAL_ROUTE_MIN_LENGTH ||
+                        pathElevation.gain > SHORT_NORMAL_ROUTE_MIN_ELEVATION_GAIN && routeLength >= SHORT_NORMAL_ROUTE_MIN_LENGTH;
                     controls.updateRouteType(isNormalRoute);
 
                     const isPathElevationLossValid = true;

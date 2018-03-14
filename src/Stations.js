@@ -9,6 +9,7 @@ const turf = {
     helpers
 };
 
+
 const CONSTS = {
     START_INDEX: 0,
     FIRST_STATION_INDEX: 1,
@@ -52,6 +53,10 @@ export default class Stations {
 
     _addIndexes () {
         const getIndex = str => {
+            /** Regular expressions for extracting station number
+             *  from a given string (which might be represented by different types
+             *  of numbers and different delimiters)
+             */
             const START_NAMES_REGEX = /^(wstęp|wprowadzenie|początek|start)$/ig;
             const END_NAMES_REGEX = /^(zakończenie|koniec|podsumowanie)$/ig;
             const ROMAN_NUMBERS_REGEX = /^(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII|XIV)$/g;
@@ -74,7 +79,7 @@ export default class Stations {
             // split
             const parts = str.trim().split(SPLITTER_REGEX);
 
-            _.forEach(parts, function (part) {
+            _.forEach(parts, part => {
                 // try roman numbers
                 let matches = part.match(ROMAN_NUMBERS_REGEX); // it isn't clear why there are for matches declaration
                 if (!_.isNull(matches)) {

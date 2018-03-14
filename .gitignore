@@ -12,6 +12,3 @@ node_modules/
 
 # Debug logs
 selenium-debug.log
-
-# Keys
-server/config.json
