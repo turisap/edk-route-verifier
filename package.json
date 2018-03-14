@@ -16,7 +16,8 @@
     "deploy:current": "npm run bundle:test && npm test && npm run git:branch && npm run bundle:dist && npm run git:commit && cross-var git tag v$npm_package_version && npm run git:push",
     "deploy:next": "npm run bundle:test && npm test && npm run git:branch && npm run bundle:dist && npm run git:commit && npm run version:patch && npm run git:push",
     "build:dev": "webpack --config webpack.config.js --mode development",
-    "build:prod": "webpack --config webpack.config.js --mode production"
+    "build:prod": "webpack --config webpack.config.js --mode production",
+    "check": "concurrently \"eslint src/**\" \"eslint server/**\" --cache --fix"
   },
   "author": "Jakub Niezgoda (qooban)",
   "license": "MIT",
@@ -29,6 +30,7 @@
     "@turf/flatten": "^5.1.5",
     "@turf/point-on-line": "^5.0.3",
     "chart.js": "^2.7.1",
+    "concurrently": "^3.5.1",
     "lodash": "^4.17.4",
     "loglevel": "^1.5.1",
     "togeojson": "^0.16.0"
@@ -43,6 +45,9 @@
     "brfs": "^1.4.3",
     "chrome-driver-standalone": "^2.33.0",
     "cross-var": "^1.1.0",
+    "eslint": "^4.18.2",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
     "nightwatch": "^0.9.19",
     "selenium-server-standalone-jar": "^3.8.1",
     "webpack": "^4.1.1",
